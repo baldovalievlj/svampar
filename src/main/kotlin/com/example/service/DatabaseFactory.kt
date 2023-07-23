@@ -1,9 +1,9 @@
 package com.example.service
 
-import com.example.models.CategoryTable
-import com.example.models.OrderItemTable
-import com.example.models.OrderTable
-import com.example.models.UserTable
+import com.example.models.entities.TypeTable
+import com.example.models.entities.OrderItemTable
+import com.example.models.entities.OrderTable
+import com.example.models.entities.UserTable
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.server.config.*
@@ -32,7 +32,7 @@ object DatabaseFactory {
         })
         val database = Database.connect(connectionPool)
         transaction() {
-            SchemaUtils.createMissingTablesAndColumns(UserTable, OrderTable, OrderItemTable, CategoryTable)
+            SchemaUtils.createMissingTablesAndColumns(UserTable, OrderTable, OrderItemTable, TypeTable)
         }
     }
 

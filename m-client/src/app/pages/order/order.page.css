@@ -1,0 +1,14 @@
+.icon-large{
+  font-size: 4vh;
+  height: 4vh;
+  width: 4vh;
+}
+.filter-container {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+mat-form-field {
+  width: 100%;
+}

@@ -1,0 +1,25 @@
+<div class="px-lg-5 px-2" fxLayoutGap="20px" fxLayout="column" fxLayoutAlign="start start">
+  <div class="py-3 w-100" fxLayout="row" fxLayoutAlign="space-between center">
+    <div>
+      <h1 fxLayoutAlign="start center">
+        <mat-icon class="icon-large">store</mat-icon>
+        <span class="px-2">{{'sellers' | translate}}</span>
+      </h1>
+    </div>
+    <div>
+      <a mat-flat-button color="primary" routerLink="/sellers/create">
+        <mat-icon>store</mat-icon>
+        {{'create' | translate}} {{'seller' | translate}}
+      </a>
+    </div>
+  </div>
+
+  <seller-list class="w-100 mb-5"
+               [sellers]="sellers"
+               [totalCount]="totalCount"
+               [page]="paged"
+               (pageChange)="onPageChange($event)"
+               (delete)="onDelete($event)">
+  </seller-list>
+
+</div>

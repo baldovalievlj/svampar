@@ -1,0 +1,59 @@
+<mat-card [ngClass]="{'seller-form-card-mobile': isMobile, 'seller-form-card-desktop': !isMobile}">
+  <mat-card-content>
+    <form [formGroup]="sellerForm" class="form-container">
+      <div class="row">
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>{{'name'| translate}}</mat-label>
+            <input matInput formControlName="name"/>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>{{'social_security_number'| translate}}</mat-label>
+            <input matInput formControlName="socialSecurityNumber"/>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>{{'phone_number' | translate}}</mat-label>
+            <input matInput formControlName="phoneNumber"/>
+          </mat-form-field>
+        </div>
+        <div class="col-sm-6">
+          <mat-form-field appearance="outline" class="w-100">
+            <mat-label>{{'email' | translate}}</mat-label>
+            <input matInput formControlName="email"/>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{'address' | translate}}</mat-label>
+          <input matInput formControlName="address"/>
+        </mat-form-field>
+      </div>
+
+      <div class="row">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>{{'additional_info' | translate}}</mat-label>
+          <textarea matInput
+                    cdkTextareaAutosize
+                    #autosize="cdkTextareaAutosize"
+                    cdkAutosizeMinRows="1"
+                    cdkAutosizeMaxRows="5"
+                    formControlName="additionalInfo"></textarea>
+        </mat-form-field>
+      </div>
+      <mat-error *ngIf="this.error != null" class="pb-2">
+        {{error | translate}}*
+      </mat-error>
+      <div class="d-inline-block">
+        <button type="button" mat-raised-button color="primary" (click)="onSubmit()"
+                [disabled]="sellerForm.invalid">{{(seller ? 'update' : 'create') | translate}}</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

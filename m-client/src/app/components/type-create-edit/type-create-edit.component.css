@@ -1,0 +1,10 @@
+.type-form-card-mobile {
+  max-width: 100%;
+  margin: 16px;
+}
+
+.type-form-card-desktop {
+  padding: 16px;
+  max-width: 768px;
+  margin: 16px auto;
+}

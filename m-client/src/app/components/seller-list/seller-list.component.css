@@ -1,0 +1,38 @@
+.mat-column-actions {
+  flex: none;
+  width: 10%;
+}
+
+.mat-column-id {
+  flex: none;
+  width: 5%;
+}
+
+.mat-column-name {
+  flex: none;
+  width: 15%;
+}
+
+.mat-column-socialSecurity {
+  flex: none;
+  width: 10%;
+}
+
+.mat-column-address {
+  flex: none;
+  width: 20%;
+}
+
+.mat-column-phoneNumber {
+  flex: none;
+  width: 10%;
+}
+
+.mat-column-email {
+  flex: none;
+  width: 15%;
+}
+.mat-column-additionalInfo {
+  flex: none;
+  width: 20%;
+}

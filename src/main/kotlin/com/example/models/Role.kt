@@ -1,7 +1,7 @@
 package com.example.models
 
 enum class Role {
-    SUPER_ADMIN,
+    SUPERADMIN,
     ADMIN,
     DISTRIBUTOR
 }

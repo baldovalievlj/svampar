@@ -1,0 +1,16 @@
+<div class="px-md-5 px-2" fxLayoutGap="20px" fxLayout="column" fxLayoutAlign="start start">
+  <div class="px-4 pt-4 w-100" fxLayout="row" fxLayoutAlign="space-between start">
+    <div>
+      <h1 fxLayoutAlign="start center">
+        <mat-icon class="icon-large" svgIcon="mushroom"></mat-icon>
+        <span class="px-2">{{(type ? 'edit' : 'create') | translate}} {{'type' | translate}}</span>
+      </h1>
+    </div>
+  </div>
+
+  <type-create-edit
+    [type]="type"
+    [isMobile]="isMobile"
+    (submit)="onSubmit($event)">
+  </type-create-edit>
+</div>

@@ -8,13 +8,21 @@ import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
 import io.ktor.server.config.*
 import io.ktor.server.response.*
-import java.util.*
 
 fun Application.configureSecurity(config: ApplicationConfig) {
     val secret = config.property("jwt.secret").getString()
     val issuer = config.property("jwt.issuer").getString()
     val audience = config.property("jwt.audience").getString()
     val myRealm = config.property("jwt.realm").getString()
+
+//    install(Sessions) {
+//        cookie<LoginSession>("Authentication", SessionStorageMemory()) {
+//            cookie.extensions["SameSite"] = "lax"
+//            cookie.httpOnly = true
+//                cookie.path = "/"
+//        }
+//    }
+
     install(Authentication) {
         jwt("auth-jwt") {
             realm = myRealm
@@ -26,6 +34,7 @@ fun Application.configureSecurity(config: ApplicationConfig) {
                     .build()
             )
             validate { credential ->
+                credential
                 if (credential.payload.getClaim("username").asString() != "") {
                     JWTPrincipal(credential.payload)
                 } else {

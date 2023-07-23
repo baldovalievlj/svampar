@@ -1,0 +1,19 @@
+<div class="px-md-5 px-2" fxLayoutGap="20px" fxLayout="column" fxLayoutAlign="start start">
+  <div class="px-4 pt-4 w-100" fxLayout="row" fxLayoutAlign="space-between start">
+    <div>
+      <h1 fxLayoutAlign="start center">
+        <mat-icon class="icon-large">library_add</mat-icon>
+        <span class="px-2">{{'create' | translate}} {{'order' | translate}}</span>
+      </h1>
+    </div>
+  </div>
+
+  <order-create-edit class="w-100"
+                     [isMobile]="isMobile"
+                     [types$]="types$"
+                     [sellers$]="sellers$"
+                     (submit)="onSubmit($event)"
+                     (createType)="onCreateType()"
+                     (createSeller)="onCreateSeller()">
+  </order-create-edit>
+</div>

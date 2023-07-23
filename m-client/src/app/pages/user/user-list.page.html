@@ -1,0 +1,27 @@
+<div class="px-lg-5 px-2" fxLayoutGap="20px" fxLayout="column" fxLayoutAlign="start start">
+  <div class="py-3 w-100" fxLayout="row" fxLayoutAlign="space-between center">
+    <div>
+      <h1 fxLayoutAlign="start center">
+        <mat-icon class="icon-large">person</mat-icon>
+        <span class="px-2">{{'users' | translate}}</span>
+      </h1>
+    </div>
+    <div>
+      <a mat-flat-button color="primary" routerLink="/users/create">
+        <mat-icon>person_add</mat-icon>
+        {{'create' | translate}} {{'user' | translate}}
+      </a>
+    </div>
+  </div>
+
+  <user-list class="w-100 mb-5"
+             [users]="users"
+             [totalCount]="totalCount"
+             [page]="paged"
+             [authentication]="user"
+             (pageChange)="onPageChange($event)"
+             (changePassword)="onChangePassword($event)"
+             (delete)="onDelete($event)">
+  </user-list>
+
+</div>

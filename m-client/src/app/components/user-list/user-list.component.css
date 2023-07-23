@@ -1,0 +1,9 @@
+.mat-column-actions {
+  flex: none;
+  width: 15%;
+}
+
+.mat-column-id {
+  flex: none;
+  width: 5%;
+}

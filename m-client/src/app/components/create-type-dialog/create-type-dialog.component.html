@@ -1,0 +1,24 @@
+<h2 mat-dialog-title>Add type</h2>
+<mat-dialog-content>
+  <form [formGroup]="typeForm" class="form-container">
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>{{'name'| translate}}</mat-label>
+      <input matInput formControlName="name"/>
+    </mat-form-field>
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>{{'description' | translate}}</mat-label>
+      <input matInput formControlName="description"/>
+    </mat-form-field>
+    <mat-error *ngIf="this.error != null" class="pb-2">
+      {{error | translate}}*
+    </mat-error>
+  </form>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <mat-dialog-actions>
+    <button mat-flat-button mat-dialog-close="">Cancel</button>
+    <button type="button" mat-flat-button color="primary" (click)="onSubmit()"
+            [disabled]="typeForm.invalid">{{ 'create' | translate}}</button>
+  </mat-dialog-actions>
+</mat-dialog-actions>

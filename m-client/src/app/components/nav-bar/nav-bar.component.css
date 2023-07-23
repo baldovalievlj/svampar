@@ -1,0 +1,15 @@
+.sidenav-container {
+  width: 200px;
+}
+mat-toolbar{
+  height: 8vh;
+}
+mat-sidenav-content{
+  min-height: 92vh;
+}
+
+.nav-icon svg {
+  width: 24px;
+  height: 24px;
+  overflow: hidden;
+}

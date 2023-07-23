@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            padding-top: 50px;
+            /*padding: 50px 0 20px 0;*/
+        }
+        th {
+            text-align: start
+        }
+        body {
+            padding: 10px;
+            font-family: Arial,sans-serif;
+        }
+    </style>
+</head>
+<body>
+<h3 style="color: #444445">Order ID: $id</h3>
+<p><b>Date:</b> $dateCreated</p>
+<p><b>User:</b> ${user.username}</p>
+<p><b>Seller:</b> ${seller.name}</p>
+<div style="padding: 50px 0 50px 0;">
+    <table>
+        <tr style="border-bottom: 2px solid black;">
+            <th>#</th>
+            <th>Item</th>
+            <th>Price</th>
+            <th>Quantity</th>
+            <th>Total</th>
+        </tr>
+        <tr>
+            <td>${it.number}</td>
+            <td>${it.type}</td>
+            <td>${it.price} Kr</td>
+            <td>${it.amount} Kg</td>
+            <td>${it.totalPrice}</td>
+        </tr>
+    </table>
+</div>
+
+<div style="float:right">
+    <p><b>Total Amount:</b> $totalAmount</p>
+    <p><b>Total Price:</b> $totalPrice</p>
+</div>
+
+</body>
+</html>

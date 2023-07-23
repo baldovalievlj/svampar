@@ -1,0 +1,50 @@
+<div class="px-lg-5 px-2" fxLayout="column" fxLayoutAlign="start start">
+  <div class="py-3 w-100" fxLayout="row wrap" fxLayoutAlign="start center" fxLayoutGap="20px">
+    <div>
+      <h1 fxLayoutAlign="start center">
+        <mat-icon class="icon-large">list_alt</mat-icon>
+        <span class="px-2">{{'orders' | translate}}</span>
+      </h1>
+    </div>
+    <form [formGroup]="filters" fxFlex fxLayout="row wrap" fxLayoutAlign="center center" fxLayoutGap="20px">
+      <div>
+        <mat-form-field *ngIf="user?.role != 'DISTRIBUTOR'">
+          <mat-label>{{'user' | translate}}</mat-label>
+          <mat-select formControlName="user">
+            <mat-option *ngFor="let user of users" [value]="user.id">{{ user.username }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="fill">
+          <mat-label>Choose a date range</mat-label>
+          <mat-date-range-input [rangePicker]="picker">
+            <input matStartDate formControlName="startDate">
+            <input matEndDate formControlName="endDate">
+          </mat-date-range-input>
+          <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+        </mat-form-field>
+      </div>
+      <div fxLayoutAlign="center center">
+        <button mat-stroked-button class="reset" color="warn" (click)="clearFilters()">
+          <mat-icon>clear</mat-icon>Clear
+        </button>
+      </div>
+    </form>
+    <div>
+      <a mat-flat-button color="primary" routerLink="/orders/create">
+        <mat-icon>library_add</mat-icon>
+        {{'create' | translate}} {{'order' | translate}}
+      </a>
+    </div>
+  </div>
+  <order-list class="w-100"
+              [totalCount]="totalCount"
+              [page]="paged"
+              (pageChange)="onUpdateParams($event)"
+              (export)="onOrderExport($event)"
+              (email)="onOrderEmail($event)"
+              [orders]="orders">
+  </order-list>
+</div>

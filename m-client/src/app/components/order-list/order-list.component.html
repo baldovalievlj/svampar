@@ -1,0 +1,96 @@
+<div class="table-container">
+  <table mat-table [dataSource]="ordersDataSource" multiTemplateDataRows>
+
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>{{"id" | translate}}</th>
+      <td mat-cell *matCellDef="let order">{{ order.id }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="username">
+      <th mat-header-cell *matHeaderCellDef>{{"user" | translate}}</th>
+      <td mat-cell *matCellDef="let order">{{ order.user.username }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="seller">
+      <th mat-header-cell *matHeaderCellDef>{{"seller" | translate}}</th>
+      <td mat-cell *matCellDef="let order">{{ order.seller.name }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="details">
+      <th mat-header-cell *matHeaderCellDef>{{"details" | translate}}</th>
+      <td mat-cell *matCellDef="let order">{{ order.details }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="amount">
+      <th mat-header-cell *matHeaderCellDef>{{"amount" | translate}}</th>
+      <td mat-cell *matCellDef="let order">{{ order.totalAmount | number: '.2' }}{{'amount_unit' | translate}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef>{{"price" | translate}}</th>
+      <td mat-cell *matCellDef="let order">{{ order.totalPrice | number: '.2' }} {{'price_unit' | translate}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="dateCreated">
+      <th mat-header-cell *matHeaderCellDef>{{"date_created" | translate}}</th>
+      <td mat-cell *matCellDef="let order">{{ order.dateCreated | date :'short' }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="actions">
+      <th mat-header-cell *matHeaderCellDef class="text-center">{{"actions" | translate}}</th>
+      <td mat-cell *matCellDef="let order" class="text-center">
+        <button mat-icon-button (click)="export.emit(order.id)" type="button"
+                matTooltip="{{'export' | translate}} {{'order' | translate}}" matTooltipPosition="above">
+          <mat-icon>save_alt</mat-icon>
+        </button>
+        <button mat-icon-button (click)="email.emit(order.id)" type="button"
+                matTooltip="{{'email_seller' | translate}}" matTooltipPosition="above">
+          <mat-icon>email</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="expandedDetail">
+      <td class="px-0" mat-cell *matCellDef="let order " [attr.colspan]="ordersColumns.length">
+        <div class="element-detail" [@detailExpand]="order.isExpanded ? 'expanded' : 'collapsed'">
+          <div class="expanded-contents">
+            <table class="w-100">
+              <tr *ngFor="let item of order.items">
+                <td style="width:5%">
+                </td>
+                <td style="width:20%" class="px-3">
+                  {{item.type.name}}
+                </td>
+                <td style="width:30%;" class="px-3">
+                  {{item.item}}
+                </td>
+                <td style="width:15%;" class="px-3">
+                  {{item.amount | number: '.2'}} {{'amount_unit' | translate}}
+                </td>
+                <td style="width:15%;" class="px-3">
+                  {{item.price | number: '.2'}} {{'price_unit' | translate}}
+                </td>
+                <td style="width:20%;" class="px-3">
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="ordersColumns"></tr>
+    <tr mat-row *matRowDef="let order; columns: ordersColumns;" class="element-row"
+        [class.expanded-row]="order.isExpanded" (click)="order.isExpanded = !order.isExpanded">>
+    </tr>
+    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="detail-row"></tr>
+  </table>
+</div>
+
+<mat-paginator
+  [length]="totalCount"
+  [pageSize]="page.size"
+  [pageIndex]="page.index"
+  [pageSizeOptions]="pageSizeOptions"
+  (page)="onPageChange($event)">
+</mat-paginator>

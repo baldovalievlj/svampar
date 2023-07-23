@@ -1,0 +1,16 @@
+<div class="px-md-5 px-2" fxLayoutGap="20px" fxLayout="column" fxLayoutAlign="start center">
+  <div class="px-4 pt-4 w-100" fxLayout="row" fxLayoutAlign="center start">
+    <div>
+      <h1 fxLayoutAlign="start start">
+        <mat-icon class="icon-large">store</mat-icon>
+        <span class="px-2">{{(seller ? 'edit' : 'create') | translate}} {{'seller' | translate}}</span>
+      </h1>
+    </div>
+  </div>
+
+  <seller-create-edit
+    [seller] ="seller"
+    [isMobile]="isMobile"
+    (submit)="onSubmit($event)">
+  </seller-create-edit>
+</div>

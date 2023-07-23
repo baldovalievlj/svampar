@@ -1,0 +1,37 @@
+<!-- type-list.page.html -->
+<table mat-table [dataSource]="types">
+  <ng-container matColumnDef="id">
+    <th mat-header-cell *matHeaderCellDef>{{'id' | translate}}</th>
+    <td mat-cell *matCellDef="let type">{{type.id}}</td>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <th mat-header-cell *matHeaderCellDef>{{'name' | translate}}</th>
+    <td mat-cell *matCellDef="let type">{{type.name}}</td>
+  </ng-container>
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef>{{'description' | translate}}</th>
+    <td mat-cell *matCellDef="let type">{{type.description}}</td>
+  </ng-container>
+  <ng-container matColumnDef="actions">
+    <th mat-header-cell *matHeaderCellDef style="text-align: center">{{'actions' | translate}}</th>
+    <td mat-cell *matCellDef="let type" style="text-align: center">
+      <button mat-icon-button [routerLink]="'/types/edit/'+type.id" matTooltip="{{'edit' | translate}} {{'type' | translate}}" matTooltipPosition="above">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="warn" (click)="delete.emit(type.id)" matTooltip="{{'delete' | translate}} {{'type' | translate}}" matTooltipPosition="above">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+  <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+</table>
+
+<mat-paginator
+  [length]="totalCount"
+  [pageSize]="page.size"
+  [pageIndex]="page.index"
+  [pageSizeOptions]="pageSizeOptions"
+  (page)="onPageChange($event)">
+</mat-paginator>

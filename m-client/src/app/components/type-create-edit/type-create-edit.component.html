@@ -1,0 +1,27 @@
+<mat-card [ngClass]="{'type-form-card-mobile': isMobile, 'type-form-card-desktop': !isMobile}">
+  <mat-card-content>
+    <form [formGroup]="typeForm" class="form-container">
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>{{'name'| translate}}</mat-label>
+        <input matInput formControlName="name"/>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-100">
+        <mat-label>{{'description' | translate}}</mat-label>
+        <textarea matInput
+                  cdkTextareaAutosize
+                  #autosize="cdkTextareaAutosize"
+                  cdkAutosizeMinRows="1"
+                  cdkAutosizeMaxRows="5"
+                  formControlName="description"></textarea>
+      </mat-form-field>
+      <!--      TODO check-->
+      <mat-error *ngIf="this.error != null" class="pb-2">
+        {{error | translate}}*
+      </mat-error>
+      <div class="d-inline-block">
+        <button type="button" mat-raised-button color="primary" (click)="onSubmit()"
+                [disabled]="typeForm.invalid">{{(type ? 'update' : 'create') | translate}}</button>
+      </div>
+    </form>
+  </mat-card-content>
+</mat-card>

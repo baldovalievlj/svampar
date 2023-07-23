@@ -1,7 +1,6 @@
 package com.example
 
 import com.example.plugins.*
-import com.example.service.TokenProviderService
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.auth.*
@@ -10,6 +9,7 @@ import io.ktor.server.config.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+
 import java.util.*
 
 fun main(args: Array<String>): Unit =
@@ -20,5 +20,6 @@ fun Application.module() {
     configureSecurity(environment.config)
     configureDatabase(environment.config)
     configureSerialization()
-    configureRouting(TokenProviderService(environment.config))
+    configureRouting()
+    configureDependencyInjection(environment.config)
 }

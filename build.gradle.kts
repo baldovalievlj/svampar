@@ -29,11 +29,19 @@ dependencies {
     implementation("io.ktor:ktor-server-core-jvm:2.2.4")
     implementation("io.ktor:ktor-server-content-negotiation-jvm:2.2.4")
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:2.2.4")
+    implementation("io.ktor:ktor-serialization-jackson:$ktor_version")
+    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.14.2")
     implementation("io.ktor:ktor-server-auth:2.2.4")
     implementation("io.ktor:ktor-server-auth-jwt:2.2.4")
     implementation("io.ktor:ktor-server-netty-jvm:2.2.4")
     implementation("io.ktor:ktor-server-auth-jvm:2.2.4")
-
+    implementation("io.ktor:ktor-client-cio:$ktor_version")
+    implementation("io.ktor:ktor-client-core:$ktor_version")
+    implementation("io.ktor:ktor-server-sessions-jvm:2.2.4")
+    implementation("io.ktor:ktor-http:$ktor_version")
+    implementation("com.github.librepdf:openpdf:1.3.29")
+    implementation("org.xhtmlrenderer:flying-saucer-core:9.1.22")
+    implementation("org.xhtmlrenderer:flying-saucer-pdf-openpdf:9.1.22")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 
     implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
@@ -44,4 +52,11 @@ dependencies {
     implementation("com.zaxxer:HikariCP:$hikari_version")
     testImplementation("io.ktor:ktor-server-tests-jvm:2.2.4")
     implementation("org.mindrot:jbcrypt:0.4")
+
+    // Koin for Kotlin
+    implementation("io.insert-koin:koin-core:3.4.1")
+
+
+    // Koin for Ktor (server)
+    implementation("io.insert-koin:koin-ktor:3.4.1")
 }

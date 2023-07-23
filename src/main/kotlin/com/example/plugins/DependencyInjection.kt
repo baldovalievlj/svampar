@@ -16,7 +16,8 @@ fun Application.configureDependencyInjection(config: ApplicationConfig) {
             single { PdfExportService() }
             single { ConfigurationRepository() }
             single { ConfigurationService(get()) }
-            single { EmailService(get(), get()) }
+            single { EmailService(get(), get(), get()) }
+            single { get<Application>().environment.config }
         })
     }
 }

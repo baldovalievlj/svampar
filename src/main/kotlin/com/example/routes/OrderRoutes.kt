@@ -3,7 +3,6 @@ package com.example.routes
 import com.example.dao.order.ordersRepository
 import com.example.dao.seller.sellersRepository
 import com.example.dao.user.usersRepository
-import com.example.models.dto.OrderDTO
 import com.example.models.requests.OrderRequest
 import com.example.service.EmailService
 import com.example.service.PdfExportService

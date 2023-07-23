@@ -90,5 +90,5 @@ tr.element-row:not(.expanded-row):active {
 .item-name{
   padding-left: 56px;
   padding-right: 16px;
-  widht:25%;
+  width: 25%;
 }

@@ -1,0 +1,1 @@
+web: ./gradlew -Dktor.deployment.port=$PORT run

@@ -63,5 +63,5 @@ dependencies {
 }
 
 tasks.register("stage") {
-    dependsOn("installDist")
+    dependsOn("clean", "shadowJar")
 }

@@ -61,3 +61,7 @@ dependencies {
     // Koin for Ktor (server)
     implementation("io.insert-koin:koin-ktor:3.4.1")
 }
+
+tasks.register("stage") {
+    dependsOn("installDist")
+}

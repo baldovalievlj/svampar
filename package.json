@@ -4,6 +4,6 @@
     "ng": "^0.0.0"
   },
   "scripts": {
-    "heroku-postbuild": "ng build --prod"
+    "heroku-postbuild": "ng build -aot --configuration production"
   }
 }

@@ -1,6 +1,7 @@
 import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Order } from "../../../domain/order";
 import { ChartDataset, ChartOptions, ChartType } from "chart.js";
+import Decimal from "decimal.js";
 
 @Component({
   selector: 'orders-per-user-diagram',
@@ -25,28 +26,28 @@ export class OrdersPerUserDiagramComponent implements OnInit, OnChanges {
     const data = this.calculateData(this.orders);
     this.barChartLabels = data.labels;
     this.barChartData[0].data = data.totalOrders;
-    this.barChartData[1].data = data.totalPrices;
+    // this.barChartData[1].data = data.totalPrices;
   }
   ngOnChanges(): void {
     const data = this.calculateData(this.orders);
     this.barChartLabels = data.labels;
     this.barChartData[0].data = data.totalOrders;
-    this.barChartData[1].data = data.totalPrices;
+    // this.barChartData[1].data = data.totalPrices;
   }
   calculateData(orders: Order[]) {
     let labels = [];
     let totalOrders = [];
     let totalPrices = [];
 
-    const groupedOrders = orders.reduce<{ [key: string]: { count: number, totalPrice: number } }>((acc, order) => {
+    const groupedOrders = orders.reduce<{ [key: string]: { count: number, totalPrice: Decimal } }>((acc, order) => {
       if (!acc[order.user.username]) {
         acc[order.user.username] = {
           count: 0,
-          totalPrice: 0
+          totalPrice: new Decimal(0)
         };
       }
       acc[order.user.username].count++;
-      acc[order.user.username].totalPrice += order.totalPrice;
+      acc[order.user.username].totalPrice.add(new Decimal(order.totalPrice));
       return acc;
     }, {});
 

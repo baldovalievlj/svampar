@@ -52,6 +52,7 @@ dependencies {
     implementation("com.zaxxer:HikariCP:$hikari_version")
     testImplementation("io.ktor:ktor-server-tests-jvm:2.2.4")
     implementation("org.mindrot:jbcrypt:0.4")
+    implementation("org.flywaydb:flyway-core:9.21.0")
 
     // Koin for Kotlin
     implementation("io.insert-koin:koin-core:3.4.1")

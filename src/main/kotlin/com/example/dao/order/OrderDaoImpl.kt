@@ -71,17 +71,6 @@ class OrderDaoImpl : OrderDaoFacade {
         OrderPaged(orders = pagedOrders, totalCount = query.count().toInt())
     }
 
-//    override suspend fun findAllByUserPaged(user: UserEntity, limit: Int, offset: Int): OrderPaged = dbQuery {
-//        val orders = OrderTable.leftJoin(OrderItemTable).leftJoin(TypeTable).leftJoin(UserTable)
-//            .select { OrderTable.user eq user.id }
-//        val ordersP = OrderEntity.wrapRows(orders).toList().map { it.toOrderDTO() }
-//
-//        OrderPaged(
-//            ordersP,
-//            0
-//        )
-//    }
-
     override suspend fun findById(id: Int): OrderDTO? = dbQuery {
         OrderEntity.findById(id)?.toOrderDTO()
     }
@@ -99,8 +88,8 @@ class OrderDaoImpl : OrderDaoFacade {
                 this.order = order
                 this.comment = it.comment
                 this.type = type
-                this.amount = it.amount
-                this.price = it.price
+                this.amount = it.amountDecimal
+                this.price = it.priceDecimal
             }
         }
         order

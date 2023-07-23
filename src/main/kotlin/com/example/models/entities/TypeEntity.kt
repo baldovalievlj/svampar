@@ -6,7 +6,7 @@ import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
 
-object TypeTable: IntIdTable("type") {
+object TypeTable: IntIdTable("order.type") {
     val name = varchar("name", 30)
     val description = varchar("description", 30).nullable()
     val deleted = bool("deleted")

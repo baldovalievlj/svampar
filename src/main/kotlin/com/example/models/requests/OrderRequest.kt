@@ -5,7 +5,7 @@ import com.example.models.dto.UserDTO
 import java.time.LocalDateTime
 
 data class OrderRequest(
-    val details: String,
+    val details: String?,
     val seller: Int,
     val items: List<OrderItemRequest>
 )

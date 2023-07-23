@@ -18,8 +18,6 @@ interface OrderDaoFacade {
         startDate: String? = null,
         endDate: String? = null
     ): OrderPaged
-
-//    suspend fun findAllByUserPaged(user: UserEntity, limit: Int, offset: Int): OrderPaged
-    suspend fun create(orderRequest: OrderRequest, user: UserEntity, sellerEntity: SellerEntity): OrderEntity
+    suspend fun create(request: OrderRequest, user: UserEntity, seller: SellerEntity): OrderEntity
 
 }

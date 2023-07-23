@@ -16,7 +16,7 @@ class PdfExportService {
             <td>${it.type.name}</td>
             <td>${it.price} Kr</td>
             <td>${it.amount} Kg</td>
-            <td>${String.format("%.2f", (it.amount * it.price))} Kr</td>
+            <td>${String.format("%.2f", (it.amount.multiply(it.price)))} Kr</td>
             </tr>
         """
         }.joinToString("")

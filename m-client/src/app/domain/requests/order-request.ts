@@ -1,5 +1,6 @@
+
 export interface OrderRequest {
-  details: string
+  details: string | null
   seller: number
-  items: {type: number, amount: number, price: number, comment: string}[]
+  items: {type: string, amount: string, price: string, comment: string}[]
 }

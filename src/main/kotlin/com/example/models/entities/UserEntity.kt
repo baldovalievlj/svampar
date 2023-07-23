@@ -7,7 +7,7 @@ import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
 
-object UserTable : IntIdTable("user") {
+object UserTable : IntIdTable("user.user") {
     val username = varchar("username", 128).uniqueIndex()
     val role = enumeration<Role>("role")
     val password = varchar("password", 128)
@@ -17,8 +17,6 @@ object UserTable : IntIdTable("user") {
     val phoneNumber = varchar("phone_number", 30).nullable()
     val deleted = bool("deleted")
 }
-
-private const val DEFAULT_VARCHAR_COLUMN_LENGTH = 255
 
 class UserEntity(id: EntityID<Int>) : IntEntity(id) {
     companion object : IntEntityClass<UserEntity>(UserTable)

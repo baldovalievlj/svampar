@@ -6,10 +6,10 @@ import org.jetbrains.exposed.dao.IntEntityClass
 import org.jetbrains.exposed.dao.id.EntityID
 import org.jetbrains.exposed.dao.id.IntIdTable
 
-object SellerTable: IntIdTable("seller") {
-    val name = varchar("name", 30)
-    val socialSecurityNumber = varchar("social_security_number",30).uniqueIndex()
-    val address = varchar("address", 100).nullable()
+object SellerTable: IntIdTable("seller.seller") {
+    val name = varchar("name", 128)
+    val socialSecurityNumber = varchar("social_security_number",10).uniqueIndex()
+    val address = varchar("address", 128).nullable()
     val phoneNumber = varchar("phone_number", 15).nullable()
     val email = varchar("email", 30)
     val additionalInfo = varchar("additional_info",300).nullable()

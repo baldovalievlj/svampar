@@ -49,7 +49,7 @@
           <div class="row">
             <div class="col-sm-4 col-lg-3">
               <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Type</mat-label>
+                <mat-label>{{'type' | translate}}</mat-label>
                 <mat-select formControlName="type">
                   <mat-option *ngFor="let type of types" [value]="type.id">
                     {{ type.name }}
@@ -66,7 +66,7 @@
 
             <div class="col-6 col-sm-4 col-lg-2">
               <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Amount</mat-label>
+                <mat-label>{{'amount' | translate}}</mat-label>
                 <input matInput type="number" formControlName="amount">
                 <span class="suffix small" matTextSuffix>{{'amount_unit' | translate}}</span>
                 <mat-error
@@ -76,7 +76,7 @@
 
             <div class="col-6 col-sm-4 col-lg-2">
               <mat-form-field appearance="outline" class="w-100">
-                <mat-label>Price</mat-label>
+                <mat-label>{{'price' | translate}}</mat-label>
                 <input matInput type="number" formControlName="price">
                 <span class="suffix small" matTextSuffix>{{'price_unit' | translate}}</span>
                 <mat-error
@@ -86,7 +86,7 @@
 
             <div [class]="isMultipleItems ? 'col-9 col-sm-8 col-lg-3' : 'col-12 col-sm-10 col-lg-4'">
               <mat-form-field appearance="outline" class="w-100 comment">
-                <mat-label>Comment</mat-label>
+                <mat-label>{{'comment' | translate}}</mat-label>
                 <textarea matInput
                           cdkTextareaAutosize
                           #autosize="cdkTextareaAutosize"

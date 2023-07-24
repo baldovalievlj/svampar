@@ -33,16 +33,10 @@ object DatabaseFactory {
 
 fun convertDatabaseUrl(url: String): String {
     println("Converting jdbcConfig: $url")
-    val uri = if (url.startsWith("postgres://")) {
-        URI(url.substring(11)) // remove "postgres://"
-    } else {
-        URI(url)
-    }
-    val userInfo = uri.userInfo.split(":")
-    val username = userInfo[0]
-    val password = userInfo[1]
-    val database = uri.path.substring(1)
-    val jdbc = "jdbc:postgresql://${uri.host}:${uri.port}/$database?user=$username&password=$password"
+    val uri = URI(url.substringAfter("postgres://"))
+    val username = uri.userInfo.substringBefore(":")
+    val password = uri.userInfo.substringAfter(":")
+    val jdbc = "jdbc:postgresql://${uri.host}:${uri.port}${uri.path}"
     println("Converted url: $jdbc")
     return jdbc
 }

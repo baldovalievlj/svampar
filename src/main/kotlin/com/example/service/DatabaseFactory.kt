@@ -1,17 +1,11 @@
 package com.example.service
 
-import com.example.models.entities.TypeTable
-import com.example.models.entities.OrderItemTable
-import com.example.models.entities.OrderTable
-import com.example.models.entities.UserTable
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.server.config.*
 import kotlinx.coroutines.Dispatchers
 import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
-import org.jetbrains.exposed.sql.transactions.transaction
 import java.net.URI
 
 
@@ -37,9 +31,10 @@ object DatabaseFactory {
 }
 
 fun convertDatabaseUrl(databaseUrl: String): String {
-    val uri = URI(databaseUrl)
-    val username = uri.userInfo.split(":")[0]
-    val password = uri.userInfo.split(":")[1]
-    val dbUrl = "jdbc:postgresql://${uri.host}:${uri.port}${uri.path}?user=$username&password=$password"
-    return dbUrl
+    val uri = URI(databaseUrl.substring(11)) // remove "postgres://"
+    val userInfo = uri.userInfo.split(":")
+    val username = userInfo[0]
+    val password = userInfo[1]
+    val database = uri.path.substring(1)
+    return "jdbc:postgresql://${uri.host}:${uri.port}/$database?user=$username&password=$password"
 }

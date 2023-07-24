@@ -1,1 +1,1 @@
-web: ./gradlew -Dktor.deployment.port=$PORT run
+web: ./build/install/http-api/bin/http-api

@@ -15,8 +15,8 @@ import org.slf4j.LoggerFactory
 
 import java.util.*
 
-fun main(args: Array<String>): Unit {
-    embeddedServer(Netty, port = System.getenv("PORT")?.toInt() ?: 8080, module = Application::module).start(wait = true)
+fun main() {
+    embeddedServer(Netty, port = System.getenv("PORT").toInt(), module = Application::module).start(wait = true)
 }
 //    io.ktor.server.netty.EngineMain.main(args)
 

@@ -12,10 +12,18 @@ import java.io.File
 fun Application.configureRouting(
 ) {
     routing {
-        staticFiles("/", File("m-client/dist/m-client"), index = "m-client/dist/m-client/index.html")
+//        staticFiles("/", File("m-client/dist/m-client"), index = "m-client/dist/m-client/index.html")
 //        singlePageApplication {
 //            angular("m-client")
 //        }
+        static("/static") {
+            files("m-client/dist/m-client")
+        }
+
+        // Serve the index.html file for any route that isn't handled by the server.
+        static {
+            default("m-client/dist/m-client/index.html")
+        }
         userRouting()
         orderRouting()
         loginRouting()

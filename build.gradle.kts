@@ -26,6 +26,7 @@ repositories {
 
 dependencies {
     implementation("ch.qos.logback:logback-classic:$logback_version")
+    implementation("org.slf4j:slf4j-api:2.0.5")
     implementation("io.ktor:ktor-server-core-jvm:2.2.4")
     implementation("io.ktor:ktor-server-content-negotiation-jvm:2.2.4")
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:2.2.4")
@@ -56,8 +57,6 @@ dependencies {
 
     // Koin for Kotlin
     implementation("io.insert-koin:koin-core:3.4.1")
-
-
     // Koin for Ktor (server)
     implementation("io.insert-koin:koin-ktor:3.4.1")
 }

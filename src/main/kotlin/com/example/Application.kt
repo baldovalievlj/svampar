@@ -9,6 +9,7 @@ import io.ktor.server.config.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import org.slf4j.LoggerFactory
 
 import java.util.*
 
@@ -17,10 +18,14 @@ fun main(args: Array<String>): Unit =
 
 @Suppress("unused") // application.conf references the main function. This annotation prevents the IDE from marking it as unused.
 fun Application.module() {
+    val logger = LoggerFactory.getLogger("Main")
+    logger.debug("Starting to configure the app")
     configureSecurity(environment.config)
     configureMigrations()
     configureDatabase(environment.config)
     configureSerialization()
     configureRouting()
     configureDependencyInjection(environment.config)
+    logger.debug("Using port: ${environment.config.port}")
+    logger.debug("Configuration is completed")
 }

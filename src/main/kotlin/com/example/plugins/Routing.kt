@@ -23,8 +23,7 @@ fun Application.configureRouting(
         get("/api/") {
             call.respondText("Test")
         }
-        staticFiles("{...}", File("m-client/dist/m-client/index.html"))
-        staticFiles("*", File("m-client/dist/m-client/index.html"))
+        staticFiles("{...}", File("index.html"))
 //        get("{...}") {
 //            call.respondFile(File("m-client/dist/m-client/index.html"))
 //        }

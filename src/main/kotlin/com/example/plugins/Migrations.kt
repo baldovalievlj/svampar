@@ -7,9 +7,9 @@ import org.flywaydb.core.Flyway
 fun Application.configureMigrations() {
     val jdbcConfig = environment.config.property("ktor.database.jdbcURL").getString()
     println("Configuring migrations with: $jdbcConfig")
-    val databaseConfig = convertDatabaseUrl(jdbcConfig)
+    val (user, databaseConfig) = convertDatabaseUrl(jdbcConfig)
     val flyway = Flyway.configure()
-        .dataSource(databaseConfig, null, null)
+        .dataSource(databaseConfig, user.first, user.second)
         .load()
 
     flyway.migrate()

@@ -15,10 +15,10 @@ object DatabaseFactory {
         val driver = config.property("ktor.database.driverClassName").getString()
         val url = config.property("ktor.database.jdbcURL").getString()
         println("Configuring database with: $url")
-        val databaseUrl = convertDatabaseUrl(url)
+        val (user, databaseUrl) = convertDatabaseUrl(url)
         val connectionPool = HikariDataSource(HikariConfig().apply {
             driverClassName = driver
-            jdbcUrl = databaseUrl
+            jdbcUrl = "$databaseUrl?user=${user.first}&password=${user.second}"
             maximumPoolSize = 15
             isAutoCommit = false
             transactionIsolation = "TRANSACTION_REPEATABLE_READ"
@@ -31,12 +31,14 @@ object DatabaseFactory {
         newSuspendedTransaction(Dispatchers.IO) { block() }
 }
 
-fun convertDatabaseUrl(url: String): String {
+fun convertDatabaseUrl(url: String): Pair<User, String>{
     println("Converting jdbcConfig: $url")
-    val uri = URI(url.substringAfter("postgres://"))
-    val username = uri.userInfo.substringBefore(":")
-    val password = uri.userInfo.substringAfter(":")
-    val jdbc = "jdbc:postgresql://${uri.host}:${uri.port}${uri.path}"
-    println("Converted url: $jdbc")
-    return jdbc
+    val userInfo = url.substringAfter("postgres://").substringBefore("@")
+    val username = userInfo.substringBefore(":")
+    val password = userInfo.substringAfter(":")
+    val dbUrl = "jdbc:postgresql://${url.substringAfter("@")}"
+    println("Converted url: $dbUrl")
+    return User(username, password) to dbUrl
 }
+
+typealias User = Pair<String,String>

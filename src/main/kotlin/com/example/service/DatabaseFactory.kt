@@ -14,6 +14,7 @@ object DatabaseFactory {
     fun init(config: ApplicationConfig) {
         val driver = config.property("ktor.database.driverClassName").getString()
         val url = config.property("ktor.database.jdbcURL").getString()
+        println("Configuring database with: $url")
         val databaseUrl = convertDatabaseUrl(url)
         val connectionPool = HikariDataSource(HikariConfig().apply {
             driverClassName = driver
@@ -31,6 +32,7 @@ object DatabaseFactory {
 }
 
 fun convertDatabaseUrl(url: String): String {
+    println("Converting jdbcConfig: $url")
     val uri = if (url.startsWith("postgres://")) {
         URI(url.substring(11)) // remove "postgres://"
     } else {
@@ -40,5 +42,7 @@ fun convertDatabaseUrl(url: String): String {
     val username = userInfo[0]
     val password = userInfo[1]
     val database = uri.path.substring(1)
-    return "jdbc:postgresql://${uri.host}:${uri.port}/$database?user=$username&password=$password"
+    val jdbc = "jdbc:postgresql://${uri.host}:${uri.port}/$database?user=$username&password=$password"
+    println("Converted url: $jdbc")
+    return jdbc
 }

@@ -13,17 +13,6 @@ fun Application.configureRouting(
 ) {
     routing {
         staticFiles("/", File("m-client/dist/m-client"))
-//        singlePageApplication {
-//            angular("m-client")
-//        }
-//        static("/static") {
-//            files("m-client/dist/m-client")
-//        }
-//
-//        // Serve the index.html file for any route that isn't handled by the server.
-//        static {
-//            default("m-client/dist/m-client/index.html")
-//        }
         userRouting()
         orderRouting()
         loginRouting()
@@ -33,6 +22,9 @@ fun Application.configureRouting(
 
         get("/api/") {
             call.respondText("Test")
+        }
+        get("{...}") {
+            call.respondFile(File("m-client/dist/m-client/index.html"))
         }
     }
 }

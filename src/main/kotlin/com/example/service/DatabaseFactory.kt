@@ -30,8 +30,12 @@ object DatabaseFactory {
         newSuspendedTransaction(Dispatchers.IO) { block() }
 }
 
-fun convertDatabaseUrl(databaseUrl: String): String {
-    val uri = URI(databaseUrl.substring(11)) // remove "postgres://"
+fun convertDatabaseUrl(url: String): String {
+    val uri = if (url.startsWith("postgres://")) {
+        URI(url.substring(11)) // remove "postgres://"
+    } else {
+        URI(url)
+    }
     val userInfo = uri.userInfo.split(":")
     val username = userInfo[0]
     val password = userInfo[1]

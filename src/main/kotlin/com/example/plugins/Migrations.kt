@@ -1,12 +1,14 @@
 package com.example.plugins
 
+import com.example.service.convertDatabaseUrl
 import io.ktor.server.application.*
 import org.flywaydb.core.Flyway
 
 fun Application.configureMigrations() {
-    val databaseConfig = environment.config.config("ktor.database")
+    val jdbcConfig = environment.config.property("ktor.database.jdbcURL").getString()
+    val databaseConfig = convertDatabaseUrl(jdbcConfig)
     val flyway = Flyway.configure()
-        .dataSource(databaseConfig.property("jdbcURL").getString(), null, null)
+        .dataSource(databaseConfig, null, null)
         .load()
 
     flyway.migrate()

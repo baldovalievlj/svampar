@@ -12,9 +12,9 @@ import java.io.File
 fun Application.configureRouting(
 ) {
     routing {
-        singlePageApplication{
-            angular("m-client")
-        }
+//        singlePageApplication{
+//            angular("m-client")
+//        }
 //        staticResources("/","m-client/dist/m-client"){
 //            default("index.html")
 //        }

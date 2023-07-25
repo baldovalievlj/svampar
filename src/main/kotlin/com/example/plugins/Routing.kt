@@ -12,7 +12,10 @@ import java.io.File
 fun Application.configureRouting(
 ) {
     routing {
-        staticFiles("/", File("m-client/dist/m-client"))
+        staticResources("/","m-client/dist/m-client"){
+            default("m-client/dist/m-client/index.html")
+        }
+//        staticFiles("/", File("m-client/dist/m-client"))
         userRouting()
         orderRouting()
         loginRouting()
@@ -23,7 +26,7 @@ fun Application.configureRouting(
         get("/api/") {
             call.respondText("Test")
         }
-        staticFiles("{...}", File("index.html"))
+//        staticFiles("{...}", File("index.html"))
 //        get("{...}") {
 //            call.respondFile(File("m-client/dist/m-client/index.html"))
 //        }

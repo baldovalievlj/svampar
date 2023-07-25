@@ -18,7 +18,10 @@ fun Application.configureRouting(
 //        staticResources("/","m-client/dist/m-client"){
 //            default("index.html")
 //        }
-//        staticFiles("/", File("m-client/dist/m-client"))
+        staticFiles("/", File("m-client/dist/m-client")) {
+            default("index.html")
+            preCompressed(CompressedFileType.GZIP)
+        }
         userRouting()
         orderRouting()
         loginRouting()

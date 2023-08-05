@@ -5,14 +5,7 @@ import { User } from "../../domain/user";
 import { Role } from "../../domain/role";
 import { confirmPasswordValidator } from "../../services/validators/confirm-password-validator";
 import { UserRequest } from "../../domain/requests/user-request";
-import { ErrorStateMatcher } from "@angular/material/core";
 
-// class CrossFieldErrorMatcher implements ErrorStateMatcher {
-//   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-//     if(control){}
-//     return control?.dirty && form?.invalid;
-//   }
-// }
 @Component({
   selector: 'user-create-edit',
   templateUrl: './user-create-edit.component.html',

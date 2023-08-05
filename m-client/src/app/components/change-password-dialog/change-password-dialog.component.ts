@@ -11,7 +11,8 @@ import { ConfirmValidParentMatcher, PasswordValidators } from "../../services/va
 })
 export class ChangePasswordDialogComponent {
   changePasswordForm: FormGroup;
-  confirmValidParentMatcher:ConfirmValidParentMatcher;
+  confirmValidParentMatcher: ConfirmValidParentMatcher;
+  hideCurrentPassword = true;
   hidePassword = true;
   hideConfirmPassword = true;
   constructor(public dialogRef: MatDialogRef<ChangePasswordDialogComponent>,
@@ -19,13 +20,24 @@ export class ChangePasswordDialogComponent {
 
     this.confirmValidParentMatcher = new ConfirmValidParentMatcher();
     this.changePasswordForm = new FormGroup<PasswordForm>({
-        password: new FormControl('', { nonNullable: true, validators: [Validators.required, PasswordValidators.passwordLength] }),
+        password: new FormControl('', {
+          nonNullable: true,
+          validators: [Validators.required, PasswordValidators.passwordLength]
+        }),
         confirmPassword: new FormControl('', {
           nonNullable: true,
           validators: [Validators.required]
         }),
       }, { validators: PasswordValidators.passwordsMatch }
     )
+
+    if (this.data.isCurrentPasswordRequired) {
+      this.changePasswordForm.addControl('currentPassword', new FormControl('', {
+          nonNullable: true,
+          validators: [Validators.required, PasswordValidators.passwordLength]
+        }
+      ));
+    }
   }
 
   changePassword(): void {

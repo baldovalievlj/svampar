@@ -67,6 +67,7 @@ import {
   NgxMatNativeDateModule,
   NgxMatTimepickerModule
 } from "@angular-material-components/datetime-picker";
+import { MatMenuModule } from "@angular/material/menu";
 @NgModule({
   declarations: [
     AppComponent,
@@ -99,57 +100,58 @@ import {
     OrdersPerUserDiagramComponent,
     SettingsPage
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        RouterModule,
-        BrowserAnimationsModule,
-        MatCardModule,
-        MatInputModule,
-        MatButtonModule,
-        NgbModule,
-        FlexModule,
-        MatIconModule,
-        ReactiveFormsModule,
-        HttpClientModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: httpTranslateLoader,
-                deps: [HttpClient]
-            }
-        }),
-        JwtModule.forRoot({
-            config: {
-                tokenGetter: tokenGetter,
-                allowedDomains: ['http://127.0.0.1:8080/'],
-                disallowedRoutes: [],
-            },
-        }),
-        MatListModule,
-        MatSidenavModule,
-        MatToolbarModule,
-        MatProgressSpinnerModule,
-        MatTableModule,
-        MatDialogModule,
-        MatOptionModule,
-        MatSelectModule,
-        MatGridListModule,
-        MatSnackBarModule,
-        BrowserAnimationsModule,
-        MatTooltipModule,
-        MatPaginatorModule,
-        FormsModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        NgChartsModule,
-        NgToastModule,
-        MatAutocompleteModule,
-        AngularEditorModule,
-      NgxMatDatetimePickerModule,
-      NgxMatTimepickerModule,
-      NgxMatNativeDateModule,
-    ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    RouterModule,
+    BrowserAnimationsModule,
+    MatCardModule,
+    MatInputModule,
+    MatButtonModule,
+    NgbModule,
+    FlexModule,
+    MatIconModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoader,
+        deps: [HttpClient]
+      }
+    }),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ['http://127.0.0.1:8080/'],
+        disallowedRoutes: [],
+      },
+    }),
+    MatListModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatDialogModule,
+    MatOptionModule,
+    MatSelectModule,
+    MatGridListModule,
+    MatSnackBarModule,
+    BrowserAnimationsModule,
+    MatTooltipModule,
+    MatPaginatorModule,
+    FormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    NgChartsModule,
+    NgToastModule,
+    MatAutocompleteModule,
+    AngularEditorModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatNativeDateModule,
+    MatMenuModule,
+  ],
   providers: [ {
     provide: HTTP_INTERCEPTORS,
     useClass: AuthInterceptor,

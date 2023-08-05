@@ -13,3 +13,10 @@ mat-sidenav-content{
   height: 24px;
   overflow: hidden;
 }
+
+.user-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}

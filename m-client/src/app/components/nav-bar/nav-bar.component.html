@@ -3,10 +3,20 @@
     <mat-icon>menu</mat-icon>
   </button>
   <div fxLayoutAlign="center">
-    <span class="p-2">{{user?.username}}</span>
-    <button mat-icon-button aria-label="logout" (click)="this.logout.emit()">
-      <mat-icon>logout</mat-icon>
+    <button mat-button [matMenuTriggerFor]="menu">
+      <span class="user-button">{{user?.username}}
+        <mat-icon>keyboard_arrow_down</mat-icon></span>
     </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item
+              (click)="this.changePassword.emit()">
+        {{'change' | translate}} {{'password' | translate}}
+      </button>
+      <button mat-menu-item
+              (click)="this.logout.emit()">
+        {{'logout' | translate}}
+      </button>
+    </mat-menu>
   </div>
 </mat-toolbar>
 
@@ -37,7 +47,8 @@
         </mat-icon>
         <span class="p-2">{{'types_mushroom' | translate}}</span>
       </a>
-      <a mat-list-item routerLink="/settings" routerLinkActive="active" (click)="sidenav.close()">
+      <a *ngIf="user?.role != 'DISTRIBUTOR'" mat-list-item routerLink="/settings" routerLinkActive="active"
+         (click)="sidenav.close()">
         <mat-icon>settings</mat-icon>
         <span class="p-2">{{'settings' | translate}}</span>
       </a>

@@ -1,8 +1,10 @@
 {
   "username": "Username",
   "password": "Password",
+  "current_password": "Current Password",
   "login": "Login",
   "log_in": "Log in",
+  "logout": "Logout",
   "hide_password": "Hide password",
   "enter_password": "Enter your password",
   "home": "Home",

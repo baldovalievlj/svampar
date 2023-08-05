@@ -1,3 +1,6 @@
-<nav-bar [isMobile]="isMobile" [user]="user" (logout)="this.onLogout()">
+<nav-bar [isMobile]="isMobile"
+         [user]="user"
+         (logout)="this.onLogout()"
+         (changePassword)="this.onChangePassword()">
   <router-outlet></router-outlet>
 </nav-bar>

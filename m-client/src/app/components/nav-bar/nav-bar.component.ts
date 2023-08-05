@@ -11,6 +11,7 @@ export class NavBarComponent {
   @Input() isMobile = false;
   @Input() user: Authentication | null = null;
   @Output() logout = new EventEmitter<boolean>()
+  @Output() changePassword = new EventEmitter()
 
   @ViewChild("sidenav") sidenav: any
   isExpanded = false;

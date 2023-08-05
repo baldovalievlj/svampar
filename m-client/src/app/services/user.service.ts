@@ -36,6 +36,10 @@ export class UserService {
     return this.http.put(`/api/user/${id}/password`, request)
   }
 
+  updateLoggedInUserPassword( request: { currentPassword: string, password: string, confirmPassword: string }) {
+    return this.http.put(`/api/user/password`, request)
+  }
+
   deleteUser(id: number) {
     return this.http.delete(`/api/user/${id}`)
   }

@@ -1,11 +1,11 @@
-import { Form, FormControl } from "@angular/forms";
+import { Form, FormControl, FormGroup } from "@angular/forms";
+import { PasswordForm } from "./password-form";
 
 export interface UserForm {
   firstName: FormControl<string>
   lastName: FormControl<string>
   username: FormControl<string>
-  password: FormControl<string | null>
-  confirmPassword: FormControl<string | null>
+  passwordGroup?: FormGroup<PasswordForm>
   role: FormControl<string>
   email: FormControl<string>
   phoneNumber: FormControl<string | null>

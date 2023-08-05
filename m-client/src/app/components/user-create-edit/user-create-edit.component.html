@@ -28,20 +28,27 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <ng-container *ngIf="!user">
+        <ng-container *ngIf="!user && userForm.contains('passwordGroup')" formGroupName="passwordGroup">
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>{{'password' | translate}}</mat-label>
-              <input matInput type="password" formControlName="password"/>
+              <input matInput type="password" formControlName="password" [type]="hidePassword ? 'password' : 'text'"/>
+              <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword">
+                <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-error>{{'password_short_error' | translate}}</mat-error>
             </mat-form-field>
           </div>
           <div class="col-sm-6">
             <mat-form-field appearance="outline" class="w-100">
               <mat-label>{{'confirm' | translate}} {{'password' | translate}}</mat-label>
-              <input matInput type="password" formControlName="confirmPassword"/>
-              <mat-hint
-                *ngIf="userForm.hasError('passwordMismatch')">{{'password_match_error' | translate}}
-              </mat-hint>
+              <input matInput formControlName="confirmPassword"
+                     [type]="hideConfirmPassword ? 'password' : 'text'"
+                     [errorStateMatcher]="confirmValidParentMatcher"/>
+              <button mat-icon-button matSuffix (click)="hideConfirmPassword = !hideConfirmPassword">
+                <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-error>{{'password_match_error' | translate}}</mat-error>
             </mat-form-field>
           </div>
         </ng-container>
@@ -57,11 +64,7 @@
             <input matInput formControlName="phoneNumber"/>
           </mat-form-field>
         </div>
-        <!--TODO test error translations-->
         <div class="col-12">
-          <mat-error *ngIf="this.error != null" class="pb-2">
-            {{error | translate}}*
-          </mat-error>
           <div class="d-inline-block">
             <button type="button" mat-raised-button color="primary" (click)="onSubmit()"
                     [disabled]="userForm.invalid">{{(user ? 'update' : 'create') | translate}}</button>

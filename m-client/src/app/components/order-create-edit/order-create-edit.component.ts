@@ -32,7 +32,8 @@ export class OrderCreateEditComponent implements OnInit, OnDestroy {
     this.filteredSellers$ = new Observable<Seller[]>();
     this.orderForm = this.fb.group({
       seller: ['', Validators.required],
-      orderDetails: [''],
+      details: [''],
+      date: [new Date()],
       items: this.fb.array([this.createItem()])
     });
   }
@@ -98,8 +99,8 @@ export class OrderCreateEditComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    if (this.orderForm.valid) {
-      this.submit.emit(this.orderForm.getRawValue())
-    }
+    const formValue = this.orderForm.getRawValue();
+    formValue.date = formValue.date.toISOString();
+    this.submit.emit(formValue);
   }
 }

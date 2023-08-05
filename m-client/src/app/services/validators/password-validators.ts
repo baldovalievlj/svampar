@@ -3,12 +3,8 @@ import { confirmPasswordValidator } from "./confirm-password-validator";
 
 export class PasswordValidators {
   static passwordsMustMatch: ValidatorFn = (control: AbstractControl): ValidationErrors | null => {
-    console.log(control)
     const password = control.get('password')?.value;
     const confirmPassword = control.get('confirmPassword')?.value;
-    console.log(password)
-    console.log(confirmPassword)
-    console.log(password === confirmPassword)
     return password && confirmPassword && password === confirmPassword ? null : { passwordMismatch: true };
   }
 

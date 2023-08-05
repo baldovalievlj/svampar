@@ -55,10 +55,7 @@ export class SettingsPage implements OnInit {
           this.showWarning(this.translate.instant(error.error ?? 'unknown_error'))
         }
       )
-
     }
-    console.log(this.configMap[key])
-    // this.configMap[key]
   }
 
   showSuccess(message: string) {

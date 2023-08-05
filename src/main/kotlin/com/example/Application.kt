@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory
 import java.util.*
 
 fun main() {
-    embeddedServer(Netty, port = System.getenv("PORT").toInt(), module = Application::module).start(wait = true)
+    embeddedServer(Netty, port = System.getenv("PORT")?.toInt() ?: 8080, module = Application::module).start(wait = true)
 }
 //    io.ktor.server.netty.EngineMain.main(args)
 
@@ -24,12 +24,12 @@ fun main() {
 fun Application.module() {
     val logger = LoggerFactory.getLogger("Main")
     logger.debug("Starting to configure the app")
-    configureSecurity(environment.config)
+    configureSecurity()
     configureMigrations()
-    configureDatabase(environment.config)
+    configureDatabase()
     configureSerialization()
     configureRouting()
-    configureDependencyInjection(environment.config)
+    configureDependencyInjection()
     logger.debug("Using port: ${environment.config.port}")
     logger.debug("Configuration is completed")
 }

@@ -62,6 +62,11 @@ import { MatAutocompleteModule } from "@angular/material/autocomplete";
 import { OrdersPerUserDiagramComponent } from './components/diagrams/orders-per-user-diagram/orders-per-user-diagram.component';
 import { SettingsPage } from './pages/settings/settings.page';
 import { AngularEditorModule } from '@kolkov/angular-editor';
+import {
+  NgxMatDatetimePickerModule,
+  NgxMatNativeDateModule,
+  NgxMatTimepickerModule
+} from "@angular-material-components/datetime-picker";
 @NgModule({
   declarations: [
     AppComponent,
@@ -140,7 +145,10 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
         NgChartsModule,
         NgToastModule,
         MatAutocompleteModule,
-        AngularEditorModule
+        AngularEditorModule,
+      NgxMatDatetimePickerModule,
+      NgxMatTimepickerModule,
+      NgxMatNativeDateModule,
     ],
   providers: [ {
     provide: HTTP_INTERCEPTORS,

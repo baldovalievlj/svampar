@@ -12,6 +12,7 @@ import org.jetbrains.exposed.sql.SqlExpressionBuilder.greaterEq
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.lessEq
 import java.time.LocalDate
 import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 class OrderDaoImpl : OrderDaoFacade {
     override suspend fun findAll(): List<OrderDTO> = dbQuery {
@@ -79,7 +80,7 @@ class OrderDaoImpl : OrderDaoFacade {
         val order = OrderEntity.new {
             this.user = user
             this.seller = seller
-            this.dateCreated = LocalDateTime.now()
+            this.dateCreated = LocalDateTime.parse(request.date, DateTimeFormatter.ISO_DATE_TIME) ?: LocalDateTime.now()
             this.details = request.details
         }
         val orderItems = request.items.map {

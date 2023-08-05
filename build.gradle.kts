@@ -25,8 +25,8 @@ repositories {
 }
 
 dependencies {
-    implementation("ch.qos.logback:logback-classic:$logback_version")
-    implementation("org.slf4j:slf4j-api:2.0.5")
+    implementation("ch.qos.logback:logback-classic:$logback_version") //1.2.11
+//    implementation("org.slf4j:slf4j-api:2.0.5")
     implementation("io.ktor:ktor-server-core-jvm:2.2.4")
     implementation("io.ktor:ktor-server-content-negotiation-jvm:2.2.4")
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:2.2.4")

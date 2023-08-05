@@ -19,7 +19,10 @@ export class SellerCreateEditComponent implements OnInit, OnChanges {
   constructor() {
     this.sellerForm = new FormGroup<SellerForm>({
       name: new FormControl('', { nonNullable: true, validators: Validators.required }),
-      socialSecurityNumber: new FormControl('', { nonNullable: true, validators: Validators.required }),
+      socialSecurityNumber: new FormControl('', {
+        nonNullable: true,
+        validators: [Validators.required, Validators.pattern("^[0-9]*$"), Validators.minLength(8), Validators.maxLength(10)]
+      }),
       address: new FormControl(null),
       phoneNumber: new FormControl(null),
       email: new FormControl('', { nonNullable: true, validators: [Validators.required, Validators.email] }),

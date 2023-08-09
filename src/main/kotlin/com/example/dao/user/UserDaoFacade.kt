@@ -12,6 +12,6 @@ interface UserDaoFacade {
     suspend fun findById(id: Int): UserEntity?
     suspend fun create(user: UserRequest): Boolean
     suspend fun updateUser(id: Int, user: UserRequest): Boolean
-    suspend fun updateUserPassword(id: Int, request: PasswordRequest): Boolean
+    suspend fun updateUserPassword(id: Int, newPassword: String): Boolean
     suspend fun deleteById(id: Int): Boolean
 }

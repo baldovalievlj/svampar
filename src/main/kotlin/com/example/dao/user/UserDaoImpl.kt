@@ -38,9 +38,9 @@ class UserDaoImpl : UserDaoFacade {
         updateStatement > 0
     }
 
-    override suspend fun updateUserPassword(id: Int, request: PasswordRequest): Boolean = dbQuery {
+    override suspend fun updateUserPassword(id: Int, newPassword: String): Boolean = dbQuery {
         val updateStatement = UserTable.update({ UserTable.id eq id }) {
-            it[password] = BCrypt.hashpw(request.password, BCrypt.gensalt())
+            it[password] = BCrypt.hashpw(newPassword, BCrypt.gensalt())
         }
         updateStatement > 0
     }

@@ -31,6 +31,7 @@
   "required_fields_error": "Please fill all the required fields",
   "password_match_error": "Passwords don't match",
   "password_short_error": "Password should be at least 8 characters",
+  "current_password_match_error": "Current password doesn't match",
   "user_username_unique": "Username already exists",
   "failed_to_create_user": "Failed to create user",
   "failed_to_update_user": "Failed to update user",

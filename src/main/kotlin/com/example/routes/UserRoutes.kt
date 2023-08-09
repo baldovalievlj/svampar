@@ -87,7 +87,7 @@ fun Route.userRouting() {
                     call.respond(HttpStatusCode.BadRequest, "password_match_error")
                 }
                 try {
-                    val updated = usersRepository.updateUserPassword(id.toInt(), request)
+                    val updated = usersRepository.updateUserPassword(id.toInt(), request.password)
                     if (updated) {
                         call.respond(HttpStatusCode.OK)
                     } else {

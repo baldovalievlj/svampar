@@ -48,6 +48,7 @@ export class MainPage implements OnInit {
         this.userService.updateLoggedInUserPassword(result).subscribe(
           (_) => {
             this.showSuccess(`${this.translate.instant("password")} ${this.translate.instant("updated_successfully")}`)
+            this.onLogout()
           }, error => {
             this.showWarning(this.translate.instant(error.error ?? 'unknown_error'))
           }

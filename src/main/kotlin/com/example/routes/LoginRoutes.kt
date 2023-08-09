@@ -3,6 +3,7 @@ package com.example.routes
 import com.example.dao.user.usersRepository
 import com.example.models.response.Authentication
 import com.example.models.requests.LoginRequest
+import com.example.models.requests.PasswordChangeRequest
 import com.example.service.TokenProviderService
 import io.ktor.http.*
 import io.ktor.server.application.*
@@ -15,11 +16,10 @@ import org.koin.ktor.ext.inject
 import org.mindrot.jbcrypt.BCrypt
 
 fun Route.loginRouting() {
-val tokenProviderService: TokenProviderService by inject()
+    val tokenProviderService: TokenProviderService by inject()
 
     post("/api/login") {
         val login = call.receive<LoginRequest>()
-        // Check username and password
         val user = usersRepository.findByUsername(username = login.username)
             ?.takeIf { BCrypt.checkpw(login.password, it.password) }
             ?: return@post call.respondText(
@@ -27,11 +27,7 @@ val tokenProviderService: TokenProviderService by inject()
                 status = HttpStatusCode.Unauthorized
             )
 
-        // ...
-
         val token = tokenProviderService.createToken(user.username, user.role.name)
-//        call.sessions.set(LoginSession(token))
-//        call.respond(HttpStatusCode.OK)
         call.respond(hashMapOf("token" to token))
     }
 
@@ -44,9 +40,33 @@ val tokenProviderService: TokenProviderService by inject()
                     HttpStatusCode.NotFound,
                     "user_not_found"
                 )
-            call.respond(HttpStatusCode.OK,
+            call.respond(
+                HttpStatusCode.OK,
                 Authentication(username = user.username, role = user.role)
             )
+        }
+        put("/api/authentication/change_password") {
+            val request = call.receive<PasswordChangeRequest>()
+            val principal = call.principal<JWTPrincipal>()
+            val username = principal!!.payload.getClaim("username").asString()
+            val user = usersRepository.findByUsername(username)
+                ?: return@put call.respond(
+                    HttpStatusCode.NotFound,
+                    "user_not_found"
+                )
+            if (request.password != request.confirmPassword) {
+                call.respond(HttpStatusCode.BadRequest, "password_match_error")
+            }
+            if (BCrypt.checkpw(request.currentPassword, user.password)) {
+                val updated = usersRepository.updateUserPassword(user.id.value, request.password)
+                if (updated) {
+                    call.respond(HttpStatusCode.OK)
+                } else {
+                    call.respond(status = HttpStatusCode.Conflict, "failed_to_update_user")
+                }
+            } else {
+                call.respond(HttpStatusCode.BadRequest, "current_password_match_error",)
+            }
         }
     }
 

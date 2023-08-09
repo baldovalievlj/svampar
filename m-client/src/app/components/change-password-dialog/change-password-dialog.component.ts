@@ -2,7 +2,8 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { PasswordForm } from "../../domain/forms/password-form";
-import { ConfirmValidParentMatcher, PasswordValidators } from "../../services/validators/password-validators";
+import { PasswordValidators } from "../../services/validators/password-validators";
+import { ConfirmValidParentMatcher } from "../../services/validators/confirm-valid-parent-matcher";
 
 @Component({
   selector: 'change-password-dialog',

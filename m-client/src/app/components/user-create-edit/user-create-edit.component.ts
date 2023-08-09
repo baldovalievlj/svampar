@@ -5,8 +5,9 @@ import { User } from "../../domain/user";
 import { Role } from "../../domain/role";
 import { UserRequest } from "../../domain/requests/user-request";
 import { PasswordForm } from "../../domain/forms/password-form";
-import { ConfirmValidParentMatcher, PasswordValidators } from "../../services/validators/password-validators";
+import { PasswordValidators } from "../../services/validators/password-validators";
 import { ErrorStateMatcher } from "@angular/material/core";
+import { ConfirmValidParentMatcher } from "../../services/validators/confirm-valid-parent-matcher";
 
 @Component({
   selector: 'user-create-edit',
@@ -19,7 +20,7 @@ export class UserCreateEditComponent implements OnInit, OnChanges {
   @Output() submit = new EventEmitter<UserRequest>();
   userForm: FormGroup<UserForm>
   roles = Object.values(Role)
-  confirmValidParentMatcher: ErrorStateMatcher;
+  confirmValidParentMatcher: ConfirmValidParentMatcher;
   hidePassword = true;
   hideConfirmPassword = true;
 

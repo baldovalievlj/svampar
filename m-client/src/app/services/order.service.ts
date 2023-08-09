@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Order } from "../domain/order";
 import { OrderRequest } from "../domain/requests/order-request";
-import { Observable } from "rxjs";
-import { User } from "../domain/user";
 
 @Injectable({
   providedIn: 'root'
@@ -39,11 +37,11 @@ export class OrderService {
     return this.http.post('/api/order', request)
   }
 
-  exportOrder(id: number) {
-    return this.http.get(`/api/order/${id}/export`, { responseType: 'blob' });
+  exportOrder(id: number, offset: number) {
+    return this.http.post(`/api/order/${id}/export`, offset,{ responseType: 'blob' });
   }
 
-  emailOrder(id: number) {
-    return this.http.post(`/api/order/${id}/email`, {});
+  emailOrder(id: number, offset: number) {
+    return this.http.post(`/api/order/${id}/email`, offset);
   }
 }

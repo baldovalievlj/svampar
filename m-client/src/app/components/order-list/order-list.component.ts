@@ -49,4 +49,8 @@ export class OrderListComponent implements OnInit, OnChanges {
   onPageChange(event: PageEvent) {
     this.pageChange.emit({ size: event.pageSize, index: event.pageIndex })
   }
+
+  getDate(dateCreated: string) {
+    return new Date(dateCreated)
+  }
 }

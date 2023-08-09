@@ -5,7 +5,7 @@ export interface Order {
   id: number
   user: User
   seller: Seller
-  dateCreated: Date
+  dateCreated: string
   details: string | null
   items: OrderItem[]
   totalPrice: string

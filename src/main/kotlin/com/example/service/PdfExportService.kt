@@ -3,12 +3,14 @@ package com.example.service
 import com.example.models.dto.OrderDTO
 import org.xhtmlrenderer.pdf.ITextRenderer
 import java.io.ByteArrayOutputStream
+import java.time.ZoneId
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
 class PdfExportService {
-    fun createPdf(order: OrderDTO): ByteArray = order.toHtml().toPdf()
+    fun createPdf(order: OrderDTO, zoneId: ZoneId): ByteArray = order.toHtml(zoneId).toPdf()
 
-    fun OrderDTO.toHtml(): String {
+    fun OrderDTO.toHtml(zoneId: ZoneId): String {
         val itemsHtml = items.mapIndexed { number, it ->
             """
             <tr>
@@ -48,18 +50,18 @@ class PdfExportService {
     </style>
 </head>
 <body>
-<h3 style="color: #444445">Order ID: $id</h3>
-<p><b>Date:</b> ${dateCreated.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"))}</p>
-<p><b>User:</b> ${user.username}</p>
-<p><b>Seller:</b> ${seller.name}</p>
+<h3 style="color: #444445">Inköp: #$id</h3>
+<p><b>Inköpsdatum:</b> ${ZonedDateTime.parse(dateCreated).withZoneSameInstant(zoneId).format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"))}</p>
+<p><b>Inköpare:</b> ${user.firstName} ${user.lastName}</p>
+<p><b>Leverantör:</b> ${seller.id} ${seller.name}</p>
 <div style="padding: 50px 0 50px 0;">
     <table>
         <thead>
             <tr>
                 <th>#</th>
-                <th>Item</th>
-                <th>Price</th>
-                <th>Quantity</th>
+                <th>Artikel</th>
+                <th>Baspris</th>
+                <th>Bruttovikt</th>
                 <th>Total</th>
             </tr>
         </thead>
@@ -70,8 +72,8 @@ class PdfExportService {
 </div>
 
 <div style="float:right">
-    <p><b>Total Amount:</b> ${String.format("%.2f", totalAmount)} Kg</p>
-    <p><b>Total Price:</b> ${String.format("%.2f", totalPrice)} Kr</p>
+    <p><b>Totalvikt:</b> ${String.format("%.2f", totalAmount)} Kg</p>
+    <p><b>Totalbelopp:</b> ${String.format("%.2f", totalPrice)} Kr</p>
 </div>
 
 </body>

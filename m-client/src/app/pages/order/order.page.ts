@@ -127,13 +127,15 @@ export class OrderPage implements OnInit {
   }
 
   onOrderExport(id: number) {
-    this.orderService.exportOrder(id).subscribe((file: Blob) =>
+    const timeZoneOffsetMinutes = new Date().getTimezoneOffset();
+    this.orderService.exportOrder(id, timeZoneOffsetMinutes).subscribe((file: Blob) =>
       saveAs(file, `Order-${id}.pdf`)
     )
   }
 
   onOrderEmail(id: number) {
-    this.orderService.emailOrder(id).subscribe((_) => {
+    const timeZoneOffsetMinutes = new Date().getTimezoneOffset();
+    this.orderService.emailOrder(id, timeZoneOffsetMinutes).subscribe((_) => {
         this.showSuccess(`${this.translate.instant("email")} ${this.translate.instant("sent_successfully")}`)
       }, error => {
         this.showWarning(this.translate.instant(error.error ?? 'unknown_error'))

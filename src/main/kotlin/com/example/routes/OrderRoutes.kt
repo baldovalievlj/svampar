@@ -15,6 +15,9 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
 import java.lang.Exception
+import java.time.ZoneId
+import java.time.ZoneOffset
+import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 
 fun Route.orderRouting() {
@@ -73,19 +76,9 @@ fun Route.orderRouting() {
                 )
                 call.respond(order)
             }
-            get("/{id?}/export") {
-                val id = call.parameters["id"] ?: return@get call.respond(
-                    HttpStatusCode.BadRequest,
-                    "missing_id"
-                )
-                val order = ordersRepository.findById(id.toInt()) ?: return@get call.respond(
-                    HttpStatusCode.NotFound,
-                    "order_not_found"
-                )
-                val pdf = pdfExportService.createPdf(order)
-                call.respondBytes(pdf, ContentType.Application.Pdf)
-            }
-            post("/{id?}/email") {
+            post("/{id?}/export") {
+                val offset = call.receive<Int>()
+                val zoneId = ZoneId.ofOffset("UTC", ZoneOffset.ofHours(-offset / 60))
                 val id = call.parameters["id"] ?: return@post call.respond(
                     HttpStatusCode.BadRequest,
                     "missing_id"
@@ -94,9 +87,23 @@ fun Route.orderRouting() {
                     HttpStatusCode.NotFound,
                     "order_not_found"
                 )
-                val pdf = pdfExportService.createPdf(order)
+                val pdf = pdfExportService.createPdf(order, zoneId)
+                call.respondBytes(pdf, ContentType.Application.Pdf)
+            }
+            post("/{id?}/email") {
+                val offset = call.receive<Int>()
+                val zoneId = ZoneId.ofOffset("UTC", ZoneOffset.ofHours(-offset / 60))
+                val id = call.parameters["id"] ?: return@post call.respond(
+                    HttpStatusCode.BadRequest,
+                    "missing_id"
+                )
+                val order = ordersRepository.findById(id.toInt()) ?: return@post call.respond(
+                    HttpStatusCode.NotFound,
+                    "order_not_found"
+                )
+                val pdf = pdfExportService.createPdf(order, zoneId)
                 val fileName = "Order-${order.id}.pdf"
-                val date = order.dateCreated.toLocalDate().format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
+                val date = ZonedDateTime.parse(order.dateCreated).withZoneSameInstant(zoneId).format(DateTimeFormatter.ofPattern("dd-MM-yyyy"))
                 try {
                     val emailResponse = emailService.sendEmail(order.seller.email, pdf, fileName, date)
                     if (emailResponse.status == HttpStatusCode.OK) {

@@ -43,7 +43,7 @@ export class UserListPage implements OnInit {
         return this.userService.getUsersPaged(this.paged.index * this.paged.size, this.paged.size);
       })
     ).subscribe(response => {
-      this.users = response.users;
+      this.users = response.users.filter(it => it.role != 'SUPERADMIN');
       this.totalCount = response.totalCount;
     });
 

@@ -5,7 +5,7 @@ import { OrderService } from "../../services/order.service";
 import * as moment from 'moment';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'dashboard',
   templateUrl: './dashboard.page.html',
   styleUrls: ['./dashboard.page.css']
 })

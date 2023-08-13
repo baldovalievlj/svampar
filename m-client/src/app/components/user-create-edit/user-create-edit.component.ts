@@ -19,7 +19,7 @@ export class UserCreateEditComponent implements OnInit, OnChanges {
   @Input() isMobile = false;
   @Output() submit = new EventEmitter<UserRequest>();
   userForm: FormGroup<UserForm>
-  roles = Object.values(Role)
+  roles = Object.values(Role).filter(it => it != 'SUPERADMIN')
   confirmValidParentMatcher: ConfirmValidParentMatcher;
   hidePassword = true;
   hideConfirmPassword = true;

@@ -1,0 +1,9 @@
+.logo-text {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* A modern sans-serif font stack */
+  font-size: 48px; /* Adjust the size as needed */
+  font-weight: 300; /* Lighter font weight */
+  color: #333333; /* Dark gray color for a softer look */
+  letter-spacing: 0.05em; /* Slightly spaced out letters */
+  text-transform: none; /* Normal text casing */
+  line-height: 1.2; /* Comfortable line height */
+}

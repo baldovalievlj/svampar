@@ -81,5 +81,10 @@
   "settings": "Settings",
   "comment": "Comment",
   "choose_date_range": "Choose a date range",
-  "choose_date": "Choose a date"
+  "choose_date": "Choose a date",
+  "email_template": "Email template",
+  "email_subject": "Email subject",
+  "email_from_name": "Email from name",
+  "email_from": "Email from",
+  "email_api": "Email API"
 }

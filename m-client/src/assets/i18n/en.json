@@ -80,5 +80,6 @@
   "email_seller": "Email to Seller",
   "settings": "Settings",
   "comment": "Comment",
-  "choose_date_range": "Choose a date range"
+  "choose_date_range": "Choose a date range",
+  "choose_date": "Choose a date"
 }

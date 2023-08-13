@@ -36,8 +36,8 @@
 
         </div>
         <div class="col-12 col-sm-4">
-          <mat-form-field>
-            <input matInput [ngxMatDatetimePicker]="picker" placeholder="Choose a date" formControlName="date">
+          <mat-form-field appearance="outline" class="w-100">
+            <input matInput [ngxMatDatetimePicker]="picker" placeholder="{{'choose_date' | translate}}" formControlName="date">
             <ngx-mat-datepicker-toggle matSuffix [for]="picker"></ngx-mat-datepicker-toggle>
             <ngx-mat-datetime-picker #picker></ngx-mat-datetime-picker>
           </mat-form-field>

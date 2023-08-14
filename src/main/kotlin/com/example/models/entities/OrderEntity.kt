@@ -38,7 +38,7 @@ class OrderEntity(id: EntityID<Int>) : IntEntity(id) {
             details = details,
             items = orderItems,
             totalAmount = orderItems.fold(BigDecimal.ZERO) { sum, item -> sum.add(item.amount) },
-            totalPrice = orderItems.fold(BigDecimal.ZERO) { sum, item -> sum.add(item.price) },
+            totalPrice = orderItems.fold(BigDecimal.ZERO) { sum, item -> sum.add(item.price * item.amount) },
         )
     }
 }

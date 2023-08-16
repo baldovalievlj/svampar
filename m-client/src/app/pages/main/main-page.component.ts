@@ -17,8 +17,9 @@ import { NgToastService } from "ng-angular-popup";
 })
 export class MainPage implements OnInit {
   isMobile = false;
-
   user: Authentication | null = null
+  languages: string[] = []
+  currentLanguage:string = ''
 
   constructor(private deviceService: DeviceDetectorService,
               private translate: TranslateService,
@@ -31,7 +32,9 @@ export class MainPage implements OnInit {
 
   ngOnInit(): void {
     this.isMobile = this.deviceService.isMobile()
-    this.translate.getDefaultLang()
+    this.languages = this.translate.getLangs()
+    this.currentLanguage = localStorage.getItem('language') || this.translate.getDefaultLang()
+    this.translate.use(this.currentLanguage)
     this.authService.getAuthentication().subscribe((res) => this.user = res)
   }
 
@@ -55,6 +58,11 @@ export class MainPage implements OnInit {
         )
       }
     })
+  }
+  onChangeLanguage(language: string) {
+    this.translate.use(language);
+    localStorage.setItem('language', language);
+    this.currentLanguage = language;
   }
 
   showSuccess(message: string) {

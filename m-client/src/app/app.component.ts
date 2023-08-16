@@ -14,8 +14,9 @@ export class AppComponent {
   constructor(public translate: TranslateService,
               private matIconRegistry: MatIconRegistry,
               private domSanitzer: DomSanitizer,) {
-    translate.addLangs(['en', 'mk'])
-    translate.setDefaultLang('en')
+    translate.addLangs(['en', 'sv'])
+    translate.setDefaultLang('sv')
+
     this.matIconRegistry.addSvgIcon(
       'mushroom',
       this.domSanitzer.bypassSecurityTrustResourceUrl('assets/icons/mushroom.svg')
@@ -24,10 +25,6 @@ export class AppComponent {
       'mushroom_white',
       this.domSanitzer.bypassSecurityTrustResourceUrl('assets/icons/mushroom_white.svg')
     );
-  }
-
-  switchLang(lang: string) {
-    this.translate.use(lang);
   }
 
 }

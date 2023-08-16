@@ -8,6 +8,11 @@
         <mat-icon>keyboard_arrow_down</mat-icon></span>
     </button>
     <mat-menu #menu="matMenu">
+      <div class="language-menu" mat-menu-item>
+        <button mat-button *ngFor="let lang of languages" (click)="changeLanguage.emit(lang)" [class.active]="lang === currentLanguage">
+          {{ lang | uppercase }}
+        </button>
+      </div>
       <button mat-menu-item
               (click)="this.changePassword.emit()">
         {{'change' | translate}} {{'password' | translate}}

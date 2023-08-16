@@ -1,6 +1,9 @@
 <nav-bar [isMobile]="isMobile"
          [user]="user"
+         [languages]="languages"
+         [currentLanguage]="currentLanguage"
          (logout)="this.onLogout()"
-         (changePassword)="this.onChangePassword()">
+         (changePassword)="this.onChangePassword()"
+         (changeLanguage)="onChangeLanguage($event)">
   <router-outlet></router-outlet>
 </nav-bar>

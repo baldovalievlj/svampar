@@ -51,25 +51,16 @@
     <ng-container matColumnDef="expandedDetail">
       <td class="px-0" mat-cell *matCellDef="let order " [attr.colspan]="ordersColumns.length">
         <div class="element-detail" [@detailExpand]="order.isExpanded ? 'expanded' : 'collapsed'">
-          <div class="expanded-contents">
+          <div class="expandable-contents">
             <table class="w-100">
-              <tr *ngFor="let item of order.items">
-                <td style="width:5%">
-                </td>
-                <td style="width:10%" class="px-3">
-                  {{item.type.name}}
-                </td>
-                <td style="width:30%;" class="px-3">
-                  {{item.comment}}
-                </td>
-                <td style="width:15%;" class="px-3">
-                  {{item.amount | number: '.2'}} {{'amount_unit' | translate}}
-                </td>
-                <td style="width:15%;" class="px-3">
-                  {{item.price | number: '.2'}} {{'price_unit' | translate}}
-                </td>
-                <td style="width:20%;" class="px-3">
-                </td>
+              <tr *ngFor="let item of order.items" class="expandable-row">
+                <td class="expandable-cell id px-3"></td>
+                <td class="expandable-cell username px-3">{{item.type.name}}</td>
+                <td class="expandable-cell seller px-3"></td>
+                <td class="expandable-cell details px-3">{{item.comment}}</td>
+                <td class="expandable-cell amount px-3">{{item.amount | number: '.2'}} {{'amount_unit' | translate}}</td>
+                <td class="expandable-cell price px-3">{{item.price | number: '.2'}} {{'price_unit' | translate}}</td>
+                <td class="expandable-cell dateCreated px-3"></td>
               </tr>
             </table>
           </div>

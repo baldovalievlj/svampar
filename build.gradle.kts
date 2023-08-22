@@ -4,6 +4,7 @@ val logback_version: String by project
 val exposed_version: String by project
 val postgresql_version: String by project
 val hikari_version: String by project
+val koin_version: String by project
 
 plugins {
     kotlin("jvm") version "1.8.10"
@@ -56,9 +57,10 @@ dependencies {
     implementation("org.flywaydb:flyway-core:9.21.0")
 
     // Koin for Kotlin
-    implementation("io.insert-koin:koin-core:3.4.1")
+    implementation("io.insert-koin:koin-core:$koin_version")
     // Koin for Ktor (server)
-    implementation("io.insert-koin:koin-ktor:3.4.1")
+    implementation("io.insert-koin:koin-ktor:$koin_version")
+    implementation("io.insert-koin:koin-logger-slf4j:$koin_version")
 }
 tasks {
     create("stage").dependsOn("installDist")

@@ -107,7 +107,7 @@ fun Route.orderRouting() {
                 try {
                     val emailResponse = emailService.sendEmail(order.seller.email, pdf, fileName, date)
                     if (emailResponse.status == HttpStatusCode.OK) {
-                        call.respond(HttpStatusCode.OK, "Email sent successfully.")
+                        call.respond(HttpStatusCode.OK)
                     } else {
                         call.respond(HttpStatusCode.InternalServerError, "Failed to send email.")
                     }
@@ -137,21 +137,7 @@ fun Route.orderRouting() {
                 }
             }
         }
-//            get("/{id?}/total") {
-//                val id = call.parameters["id"] ?: return@get call.respondText(
-//                    "Missing id",
-//                    status = HttpStatusCode.BadRequest
-//                )
-//                val total = ordersRepository.findTotalForOrder(id.toInt()) ?: return@get call.respondText(
-//                    "No order with id $id",
-//                    status = HttpStatusCode.NotFound
-//                )
-//                call.respond(total)
-//            }
-
     }
-
-
 }
 
 fun ApplicationCall.getUsername(): String? = this.principal<JWTPrincipal>()?.payload?.getClaim("username")?.asString()

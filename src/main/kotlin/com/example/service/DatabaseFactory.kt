@@ -16,7 +16,6 @@ object DatabaseFactory {
         val config = HoconApplicationConfig(ConfigFactory.load())
         val driver = config.property("ktor.database.driverClassName").getString()
         val url = config.property("ktor.database.jdbcURL").getString()
-        println("Configuring database with: $url")
         val (user, databaseUrl) = convertDatabaseUrl(url)
         val connectionPool = HikariDataSource(HikariConfig().apply {
             driverClassName = driver
@@ -39,7 +38,6 @@ fun convertDatabaseUrl(url: String): Pair<User, String>{
         val username = userInfo.substringBefore(":")
         val password = userInfo.substringAfter(":")
         val dbUrl = "jdbc:postgresql://${url.substringAfter("@")}"
-        println("Converted url: $dbUrl")
         User(username, password) to dbUrl
     } else {
         User("postgres", "postgres") to url

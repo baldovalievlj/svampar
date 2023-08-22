@@ -1,5 +1,6 @@
 package com.example.service
 
+import com.typesafe.config.ConfigFactory
 import io.ktor.client.*
 import io.ktor.client.request.forms.*
 import io.ktor.client.statement.*
@@ -10,8 +11,9 @@ import io.ktor.utils.io.streams.*
 class EmailService(
     private val configurationService: ConfigurationService,
     private val http: HttpClient,
-    private val config: ApplicationConfig
 ) {
+    val config = HoconApplicationConfig(ConfigFactory.load())
+
     suspend fun sendEmail(to: String, file: ByteArray, fileName: String, date: String): HttpResponse =
         http.submitFormWithBinaryData(
             url = configurationService.emailApi,

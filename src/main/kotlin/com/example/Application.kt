@@ -18,7 +18,6 @@ import java.util.*
 fun main() {
     embeddedServer(Netty, port = System.getenv("PORT")?.toInt() ?: 8080, module = Application::module).start(wait = true)
 }
-//    io.ktor.server.netty.EngineMain.main(args)
 
 @Suppress("unused") // application.conf references the main function. This annotation prevents the IDE from marking it as unused.
 fun Application.module() {
@@ -30,6 +29,5 @@ fun Application.module() {
     configureSerialization()
     configureRouting()
     configureDependencyInjection()
-    logger.debug("Using port: ${environment.config.port}")
     logger.debug("Configuration is completed")
 }

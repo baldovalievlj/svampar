@@ -47,11 +47,11 @@ export class AuthenticationService {
   }
 
   logout() {
-    localStorage.removeItem("auth_token");
+    this.clearToken()
   }
 
   isAuthenticated() {
-    const token = localStorage.getItem('auth_token')
+    const token = this.getToken()
     try {
       if (token && !this.jwtHelper.isTokenExpired(token)) {
         return true
@@ -83,5 +83,13 @@ export class AuthenticationService {
     } else {
       return of(null);
     }
+  }
+
+  getToken(): string | null {
+    return localStorage.getItem('auth_token');
+  }
+
+  clearToken(): void {
+    localStorage.removeItem('auth_token');
   }
 }

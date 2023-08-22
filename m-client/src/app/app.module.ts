@@ -68,6 +68,8 @@ import {
   NgxMatTimepickerModule
 } from "@angular-material-components/datetime-picker";
 import { MatMenuModule } from "@angular/material/menu";
+import { environment } from "../environments/environment";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -123,7 +125,7 @@ import { MatMenuModule } from "@angular/material/menu";
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ['http://127.0.0.1:8080/'],
+        allowedDomains: [environment.allowedDomains],
         disallowedRoutes: [],
       },
     }),

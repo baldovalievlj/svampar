@@ -5,7 +5,7 @@ import {
   HttpHandler,
   HttpEvent, HttpErrorResponse,
 } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, Observable, of, throwError } from 'rxjs';
 import { Router } from "@angular/router";
 import { NgToastService } from "ng-angular-popup";
 import { TranslateService } from "@ngx-translate/core";
@@ -30,12 +30,13 @@ export class AuthInterceptor implements HttpInterceptor {
     console.log("getting token in intercept for request with headers:", req)
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
-        console.log("Error in interceptor:",error)
+        console.log("Error status in interceptor:", error.status)
+        console.log("Error message in interceptor:", error.message)
         if (error.status === 401) {
-          this.authService.clearToken()
+          // this.authService.clearToken()
           this.router.navigate(['/login']);
         }
-        if (error.status === 404) {
+        else if (error.status === 404) {
           this.toast.error({
             detail: this.translate.instant("error"),
             summary: this.translate.instant("not_found"),
@@ -43,7 +44,15 @@ export class AuthInterceptor implements HttpInterceptor {
             position: "br"
           })
         }
-        return throwError(error);
+        else {
+          this.toast.error({
+            detail: this.translate.instant("error"),
+            summary: error.message,
+            duration: 3000,
+            position: "br"
+          })
+        }
+        return of()
       })
     );
   }

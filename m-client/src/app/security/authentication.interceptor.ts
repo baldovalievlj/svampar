@@ -33,7 +33,7 @@ export class AuthInterceptor implements HttpInterceptor {
         console.log("Error status in interceptor:", error.status)
         console.log("Error message in interceptor:", error.message)
         if (error.status === 401) {
-          // this.authService.clearToken()
+          this.authService.clearToken()
           this.router.navigate(['/login']);
         }
         else if (error.status === 404) {

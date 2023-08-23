@@ -43,6 +43,7 @@ export class AuthenticationService {
   }
 
   setToken(authResult: { token: any; }) {
+    console.log("Setting token:", authResult.token)
     localStorage.setItem('auth_token', authResult.token)
   }
 
@@ -56,10 +57,13 @@ export class AuthenticationService {
       if (token && !this.jwtHelper.isTokenExpired(token)) {
         return true
       } else {
+        console.log("Error in aisAuthenticated for token: ",token)
+        console.log("jwtHelper return:", this.jwtHelper.isTokenExpired(token))
         this.logout()
         return false
       }
     } catch (e) {
+      console.log("Catched error isAuthenticated: ",e)
       this.logout()
       return false
     }
@@ -75,18 +79,22 @@ export class AuthenticationService {
             this.userDataFetched = true;
           },
           error => {
+            console.error('Error fetching user data failed to authenticate: ', error);
             this.logout();
-            console.error('Failed to authenticate', error);
           }
         )
       );
     } else {
+      console.error('Error fetching user data user is not authenticated');
       return of(null);
     }
   }
 
   getToken(): string | null {
-    return localStorage.getItem('auth_token');
+    console.log("Getting token")
+    const token = localStorage.getItem('auth_token');
+    console.log("The token is:", token)
+    return token;
   }
 
   clearToken(): void {

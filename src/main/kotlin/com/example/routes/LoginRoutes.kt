@@ -14,20 +14,27 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
 import org.mindrot.jbcrypt.BCrypt
+import org.slf4j.LoggerFactory
 
 fun Route.loginRouting() {
     val tokenProviderService: TokenProviderService by inject()
+    val logger = LoggerFactory.getLogger("Authentication")
+
 
     post("/api/login") {
         val login = call.receive<LoginRequest>()
         val user = usersRepository.findByUsername(username = login.username)
             ?.takeIf { BCrypt.checkpw(login.password, it.password) }
-            ?: return@post call.respondText(
-                "Wrong username or password",
-                status = HttpStatusCode.Unauthorized
-            )
+            ?: let{
+                logger.debug("Wrong username or password")
+                return@post call.respondText(
+                    "Wrong username or password",
+                    status = HttpStatusCode.Unauthorized
+                )
+            }
 
         val token = tokenProviderService.createToken(user.username, user.role.name)
+        logger.debug("Token created: $token")
         call.respond(hashMapOf("token" to token))
     }
 
@@ -35,11 +42,15 @@ fun Route.loginRouting() {
         get("/api/authentication") {
             val principal = call.principal<JWTPrincipal>()
             val username = principal!!.payload.getClaim("username").asString()
+            logger.debug("Authentication username: $username")
             val user = usersRepository.findByUsername(username)
-                ?: return@get call.respond(
-                    HttpStatusCode.NotFound,
-                    "user_not_found"
-                )
+                ?: let{
+                    logger.debug("User not found")
+                    return@get call.respond(
+                        HttpStatusCode.NotFound,
+                        "user_not_found"
+                    )
+                }
             call.respond(
                 HttpStatusCode.OK,
                 Authentication(username = user.username, role = user.role)

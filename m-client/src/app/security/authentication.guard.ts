@@ -16,9 +16,11 @@ export class AuthenticationGuard implements CanActivate {
 
   private checkAuthentication(): Observable<boolean | UrlTree> {
     const isAuthenticated = this.authService.isAuthenticated();
+    console.log("Guard check is user authenticated", isAuthenticated)
     if (isAuthenticated) {
       return of(true);
     }
+    console.log("Guard check user is not authenticated")
     return of(this.router.parseUrl('/login'));
   }
 }

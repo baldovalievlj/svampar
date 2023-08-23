@@ -5,7 +5,7 @@ import {
   HttpHandler,
   HttpEvent, HttpErrorResponse,
 } from '@angular/common/http';
-import { catchError, Observable, of, throwError } from 'rxjs';
+import { catchError, Observable, of } from 'rxjs';
 import { Router } from "@angular/router";
 import { NgToastService } from "ng-angular-popup";
 import { TranslateService } from "@ngx-translate/core";
@@ -21,17 +21,14 @@ export class AuthInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = this.authService.getToken()
-    console.log("getting token in intercept for request:", req)
     if (token && req.url.includes("/api")) {
       req = req.clone({
         headers: req.headers.set('Authorization', `Bearer ${token}`),
       });
     }
-    console.log("getting token in intercept for request with headers:", req)
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => {
-        console.log("Error status in interceptor:", error.status)
-        console.log("Error message in interceptor:", error.message)
+        console.error("Error while intercepting request:", error.message)
         if (error.status === 401) {
           this.authService.clearToken()
           this.router.navigate(['/login']);

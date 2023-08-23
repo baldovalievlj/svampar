@@ -34,7 +34,6 @@ fun Route.loginRouting() {
             }
 
         val token = tokenProviderService.createToken(user.username, user.role.name)
-        logger.debug("Token created: $token")
         call.respond(hashMapOf("token" to token))
     }
 
@@ -42,7 +41,6 @@ fun Route.loginRouting() {
         get("/api/authentication") {
             val principal = call.principal<JWTPrincipal>()
             val username = principal!!.payload.getClaim("username").asString()
-            logger.debug("Authentication username: $username")
             val user = usersRepository.findByUsername(username)
                 ?: let{
                     logger.debug("User not found")
@@ -51,6 +49,7 @@ fun Route.loginRouting() {
                         "user_not_found"
                     )
                 }
+            logger.debug("Authenticated user with username: $username")
             call.respond(
                 HttpStatusCode.OK,
                 Authentication(username = user.username, role = user.role)

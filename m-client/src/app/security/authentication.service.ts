@@ -43,7 +43,6 @@ export class AuthenticationService {
   }
 
   setToken(authResult: { token: any; }) {
-    console.log("Setting token:", authResult.token)
     localStorage.setItem('auth_token', authResult.token)
   }
 
@@ -52,19 +51,15 @@ export class AuthenticationService {
   }
 
   isAuthenticated() {
-    console.log("getting token in isAuthenticated")
     const token = this.getToken()
     try {
       if (token && !this.jwtHelper.isTokenExpired(token)) {
         return true
       } else {
-        console.log("Error in aisAuthenticated for token: ",token)
-        console.log("jwtHelper return:", this.jwtHelper.isTokenExpired(token))
         this.logout()
         return false
       }
     } catch (e) {
-      console.log("Catched error isAuthenticated: ",e)
       this.logout()
       return false
     }
@@ -92,9 +87,7 @@ export class AuthenticationService {
   }
 
   getToken(): string | null {
-    console.log("Getting token")
     const token = localStorage.getItem('auth_token');
-    console.log("Token found:", token)
     return token;
   }
 

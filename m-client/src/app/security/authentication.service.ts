@@ -94,6 +94,7 @@ export class AuthenticationService {
   getToken(): string | null {
     console.log("Getting token")
     const token = localStorage.getItem('auth_token');
+    console.log("Token found:", token)
     return token;
   }
 

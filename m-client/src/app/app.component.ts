@@ -19,11 +19,11 @@ export class AppComponent {
 
     this.matIconRegistry.addSvgIcon(
       'mushroom',
-      this.domSanitzer.bypassSecurityTrustResourceUrl('assets/icons/mushroom.svg')
+      this.domSanitzer.bypassSecurityTrustResourceUrl('./assets/icons/mushroom.svg')
     );
     this.matIconRegistry.addSvgIcon(
       'mushroom_white',
-      this.domSanitzer.bypassSecurityTrustResourceUrl('assets/icons/mushroom_white.svg')
+      this.domSanitzer.bypassSecurityTrustResourceUrl('./assets/icons/mushroom_white.svg')
     );
   }
 

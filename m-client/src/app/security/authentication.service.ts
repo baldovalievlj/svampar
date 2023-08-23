@@ -52,6 +52,7 @@ export class AuthenticationService {
   }
 
   isAuthenticated() {
+    console.log("getting token in isAuthenticated")
     const token = this.getToken()
     try {
       if (token && !this.jwtHelper.isTokenExpired(token)) {
@@ -93,7 +94,6 @@ export class AuthenticationService {
   getToken(): string | null {
     console.log("Getting token")
     const token = localStorage.getItem('auth_token');
-    console.log("The token is:", token)
     return token;
   }
 

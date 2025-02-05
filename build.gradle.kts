@@ -44,8 +44,8 @@ dependencies {
     implementation("com.github.librepdf:openpdf:1.3.29")
     implementation("org.xhtmlrenderer:flying-saucer-core:9.1.22")
     implementation("org.xhtmlrenderer:flying-saucer-pdf-openpdf:9.1.22")
+    implementation("io.github.cdimascio:dotenv-kotlin:6.4.1")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
-
     implementation("org.jetbrains.exposed:exposed-core:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-dao:$exposed_version")
     implementation("org.jetbrains.exposed:exposed-jdbc:$exposed_version")
@@ -55,10 +55,7 @@ dependencies {
     testImplementation("io.ktor:ktor-server-tests-jvm:2.2.4")
     implementation("org.mindrot:jbcrypt:0.4")
     implementation("org.flywaydb:flyway-core:9.21.0")
-
-    // Koin for Kotlin
     implementation("io.insert-koin:koin-core:$koin_version")
-    // Koin for Ktor (server)
     implementation("io.insert-koin:koin-ktor:$koin_version")
     implementation("io.insert-koin:koin-logger-slf4j:$koin_version")
 }

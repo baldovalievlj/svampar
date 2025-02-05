@@ -10,20 +10,12 @@ import io.ktor.server.auth.jwt.*
 import io.ktor.server.config.*
 import io.ktor.server.response.*
 
-fun Application.configureSecurity() {
-    val config = HoconApplicationConfig(ConfigFactory.load())
-    val secret = config.property("jwt.secret").getString()
+fun Application.configureSecurity(config: ApplicationConfig) {
+    val secret = config.propertyOrNull("jwt.secret")?.getString()
+        ?: throw IllegalArgumentException("JWT secret is missing from config")
     val issuer = config.property("jwt.issuer").getString()
     val audience = config.property("jwt.audience").getString()
     val myRealm = config.property("jwt.realm").getString()
-
-//    install(Sessions) {
-//        cookie<LoginSession>("Authentication", SessionStorageMemory()) {
-//            cookie.extensions["SameSite"] = "lax"
-//            cookie.httpOnly = true
-//                cookie.path = "/"
-//        }
-//    }
 
     install(Authentication) {
         jwt("auth-jwt") {

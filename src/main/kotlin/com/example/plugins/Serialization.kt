@@ -13,17 +13,6 @@ import io.ktor.server.routing.*
 
 fun Application.configureSerialization() {
     install(ContentNegotiation) {
-//        json(Json {
-//            encodeDefaults = true
-//            ignoreUnknownKeys = true
-//            isLenient = true
-//            allowStructuredMapKeys = true
-//            prettyPrint = true
-//            useArrayPolymorphism = false
-//            serializersModule = SerializersModule {
-//                contextual(OrderDTO.serializer())
-//            }
-//        })
         jackson {
             registerModule(JavaTimeModule())
             enable(SerializationFeature.INDENT_OUTPUT)

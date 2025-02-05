@@ -9,15 +9,8 @@ import io.ktor.server.http.content.*
 import io.ktor.server.routing.get
 import java.io.File
 
-fun Application.configureRouting(
-) {
+fun Application.configureRouting() {
     routing {
-//        singlePageApplication{
-//            angular("m-client")
-//        }
-//        staticResources("/","m-client/dist/m-client"){
-//            default("index.html")
-//        }
         staticFiles("/", File("m-client/dist/m-client")) {
             default("index.html")
             preCompressed(CompressedFileType.GZIP)
@@ -32,9 +25,5 @@ fun Application.configureRouting(
         get("/api/") {
             call.respondText("Test")
         }
-//        staticFiles("{...}", File("index.html"))
-//        get("{...}") {
-//            call.respondFile(File("m-client/dist/m-client/index.html"))
-//        }
     }
 }

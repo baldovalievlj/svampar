@@ -6,9 +6,8 @@ import com.typesafe.config.ConfigFactory
 import io.ktor.server.config.*
 import java.util.*
 
-class TokenProviderService() {
+class TokenProviderService(private val config: ApplicationConfig) {
     suspend fun createToken(username: String, role:String): String {
-        val config = HoconApplicationConfig(ConfigFactory.load())
         val secret = config.property("jwt.secret").getString()
         val issuer = config.property("jwt.issuer").getString()
         val audience = config.property("jwt.audience").getString()

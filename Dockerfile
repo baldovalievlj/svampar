@@ -3,7 +3,7 @@ FROM node:20 AS frontend
 WORKDIR /app/m-client
 COPY m-client/ ./
 RUN npm install
-RUN npm run build
+RUN NODE_OPTIONS=--max_old_space_size=512 npm run build
 
 # --------- Stage 2: Ktor backend build ---------
 FROM gradle:8-jdk21 AS backend
@@ -18,7 +18,7 @@ WORKDIR /app
 # Copy fat jar
 COPY --from=backend /app/build/libs/*.jar app.jar
 
-# Copy Angular build output to match your staticFiles() path
+# Copy Angular build output
 COPY --from=frontend /app/m-client/dist/m-client /app/m-client/dist/m-client
 
 EXPOSE 8080

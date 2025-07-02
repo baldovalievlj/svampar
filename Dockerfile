@@ -9,7 +9,8 @@ RUN NODE_OPTIONS=--max_old_space_size=2048 npm run build
 FROM gradle:8-jdk17 AS backend
 WORKDIR /app
 COPY . .
-RUN ./gradlew shadowJar -x test --no-daemon --max-workers=1
+RUN ./gradlew shadowJar -x test
+RUN ls -l /app/build/libs
 
 # --------- Stage 3: Runtime image ---------
 FROM eclipse-temurin:17

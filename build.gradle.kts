@@ -1,3 +1,5 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
@@ -61,6 +63,12 @@ dependencies {
 }
 tasks {
     create("stage").dependsOn("installDist")
+}
+
+tasks.withType<ShadowJar> {
+    archiveBaseName.set("http-api")
+    archiveClassifier.set("all")
+    archiveVersion.set("") // no version in filename
 }
 //tasks.register("stage") {
 //    dependsOn("clean", "shadowJar")

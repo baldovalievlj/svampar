@@ -8,7 +8,7 @@ RUN npm install && npm run build
 FROM gradle:8-jdk21 AS backend
 WORKDIR /app
 COPY . .
-RUN gradle shadowJar -x test
+RUN ./gradlew shadowJar -x test
 
 # --------- Stage 3: Runtime image ---------
 FROM eclipse-temurin:21

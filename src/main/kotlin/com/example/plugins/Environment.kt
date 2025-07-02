@@ -20,6 +20,7 @@ fun Application.configureEnvironment() {
     val dotenv = dotenv {
         directory = "."
         filename = dotFile
+        ignoreIfMissing = true
     }
 
     dotenv.entries().forEach {

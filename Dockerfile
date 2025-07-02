@@ -17,7 +17,7 @@ FROM eclipse-temurin:17
 WORKDIR /app
 
 # Copy fat jar
-COPY --from=backend /app/build/libs/http-api-0.0.1-all.jar app.jar
+COPY --from=backend /app/build/libs/http-api-all.jar app.jar
 
 # Copy Angular build output
 COPY --from=frontend /app/m-client/dist/m-client /app/m-client/dist/m-client

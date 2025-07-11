@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from "../../security/authentication.service";
-import { LoginRequest } from "../../domain/requests/login-request";
-import { Router } from "@angular/router";
+import {Component, OnInit} from '@angular/core';
+import {AuthenticationService} from "../../security/authentication.service";
+import {LoginRequest} from "../../domain/requests/login-request";
+import {Router} from "@angular/router";
 
 @Component({
   templateUrl: './login.page.html',
@@ -15,25 +15,29 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
-    if(this.authService.isAuthenticated()){
+    if (this.authService.isAuthenticated()) {
       this.router.navigate(['/'])
     }
   }
 
   onLogin(request: LoginRequest) {
     this.loading = true
-    this.authService.login(request).subscribe(this.onSuccess, this.onError)
+    this.authService.login(request).subscribe({
+      next: this.onSuccess,
+      error: this.onError,
+      complete: () => {
+        this.loading = false
+      }
+    })
   }
 
   onSuccess = (response: any) => {
-    this.loading = false;
     this.errorMessage = null;
     this.router.navigateByUrl("/")
     window.location.reload();
   }
 
   onError = (err: any) => {
-    this.loading = false;
     this.errorMessage = err.error
   }
 }

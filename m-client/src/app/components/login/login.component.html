@@ -1,36 +1,39 @@
-<mat-card appearance="raised" class="p-5" fxLayoutGap="20px" fxLayout="column" fxLayoutAlign="center center" >
+<mat-card appearance="raised" class="p-5" fxLayoutGap="20px" fxLayout="column" fxLayoutAlign="center center">
   <mat-card-header class="login-card" fxLayoutAlign="center center" fxLayout="column">
     <mat-icon *ngIf="!loading" class="account-icon" color="primary" fxLayoutAlign="center">account_circle</mat-icon>
     <mat-spinner *ngIf="loading" color="primary"></mat-spinner>
     <div>
-      <mat-card-title>{{'login' | translate}}</mat-card-title>
+      <mat-card-title>{{ 'login' | translate }}</mat-card-title>
     </div>
   </mat-card-header>
   <form [formGroup]="form" class="example-form" fxLayoutGap="20px" fxLayout="column" fxLayoutAlign="center center">
     <mat-card-content>
       <div class="row">
         <mat-form-field class="w-100">
-          <mat-label>{{'username' | translate}}</mat-label>
+          <mat-label>{{ 'username' | translate }}</mat-label>
           <input formControlName="username" matInput>
         </mat-form-field>
       </div>
       <div class="row">
         <mat-form-field appearance="fill">
-          <mat-label>{{'enter_password' | translate}}</mat-label>
+          <mat-label>{{ 'enter_password' | translate }}</mat-label>
           <input formControlName="password" matInput [type]="hidePassword ? 'password' : 'text'">
-          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword">
-            <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+          <button mat-icon-button matSuffix (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hidePassword">
+            <mat-icon>{{ hidePassword ? 'visibility_off' : 'visibility' }}</mat-icon>
           </button>
         </mat-form-field>
       </div>
       <div class="row" *ngIf="errorMessage">
-        <mat-card-subtitle >
-          <p class="text-danger">{{errorMessage}}</p>
+        <mat-card-subtitle>
+          <p class="text-danger">{{ errorMessage }}</p>
 
         </mat-card-subtitle>
       </div>
     </mat-card-content>
     <mat-divider></mat-divider>
-    <button type="button" (click)="onSubmit()" [disabled]="!this.form.valid || loading" mat-flat-button color="primary" class="btn-block">{{'log_in' | translate}}</button>
+    <button type="button" (click)="onSubmit()" [disabled]="!this.form.valid || loading" mat-flat-button color="primary"
+            class="btn-block">{{ 'log_in' | translate }}
+    </button>
   </form>
 </mat-card>

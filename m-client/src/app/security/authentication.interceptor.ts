@@ -30,6 +30,12 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError((error: HttpErrorResponse) => {
         console.error("Error while intercepting request:", error.message)
         if (error.status === 401) {
+          this.toast.error({
+            detail: this.translate.instant("error"),
+            summary: error.error,
+            duration: 3000,
+            position: "br"
+          })
           this.authService.clearToken()
           this.router.navigate(['/login']);
         }

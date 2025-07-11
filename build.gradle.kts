@@ -1,3 +1,5 @@
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
+
 val ktor_version: String by project
 val kotlin_version: String by project
 val logback_version: String by project
@@ -10,6 +12,7 @@ plugins {
     kotlin("jvm") version "1.8.10"
     id("io.ktor.plugin") version "2.2.3"
     id("org.jetbrains.kotlin.plugin.serialization") version "1.8.10"
+    id("com.github.johnrengelman.shadow") version "7.1.2"
 }
 
 group = "com.example"
@@ -65,3 +68,9 @@ tasks {
 //tasks.register("stage") {
 //    dependsOn("clean", "shadowJar")
 //}
+
+tasks.withType<ShadowJar> {
+    archiveBaseName.set("http-api")
+    archiveClassifier.set("all")
+    archiveVersion.set("") // No version in filename
+}
